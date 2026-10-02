@@ -2391,3 +2391,150 @@ button {
     }
 
 }
+/* =====================================
+   BUALUANG 101 MUSIC PLAYER
+===================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const musicButton =
+        document.getElementById("musicButton");
+
+    const backgroundMusic =
+        document.getElementById("backgroundMusic");
+
+    const musicLabel =
+        document.getElementById("musicLabel");
+
+
+    // ตรวจสอบว่าหา element เจอหรือไม่
+
+    if (!musicButton) {
+        console.error("ไม่พบ #musicButton");
+        return;
+    }
+
+    if (!backgroundMusic) {
+        console.error("ไม่พบ #backgroundMusic");
+        return;
+    }
+
+
+    /* =========================
+       CLICK PLAY / PAUSE
+    ========================= */
+
+    musicButton.addEventListener("click", function () {
+
+        if (backgroundMusic.paused) {
+
+            backgroundMusic
+                .play()
+                .then(function () {
+
+                    musicButton.classList.add(
+                        "playing"
+                    );
+
+                    if (musicLabel) {
+                        musicLabel.textContent =
+                            "SOUND ON";
+                    }
+
+                    console.log(
+                        "BUALUANG 101 MUSIC PLAYING"
+                    );
+
+                })
+                .catch(function (error) {
+
+                    console.error(
+                        "เปิดเพลงไม่ได้:",
+                        error
+                    );
+
+                    if (musicLabel) {
+                        musicLabel.textContent =
+                            "FILE ERROR";
+                    }
+
+                });
+
+        } else {
+
+            backgroundMusic.pause();
+
+            musicButton.classList.remove(
+                "playing"
+            );
+
+            if (musicLabel) {
+                musicLabel.textContent =
+                    "SOUND OFF";
+            }
+
+        }
+
+    });
+
+
+    /* =========================
+       MUSIC EVENTS
+    ========================= */
+
+    backgroundMusic.addEventListener(
+        "play",
+        function () {
+
+            musicButton.classList.add(
+                "playing"
+            );
+
+            if (musicLabel) {
+                musicLabel.textContent =
+                    "SOUND ON";
+            }
+
+        }
+    );
+
+
+    backgroundMusic.addEventListener(
+        "pause",
+        function () {
+
+            musicButton.classList.remove(
+                "playing"
+            );
+
+            if (musicLabel) {
+                musicLabel.textContent =
+                    "SOUND OFF";
+            }
+
+        }
+    );
+
+
+    /* =========================
+       ERROR CHECK
+    ========================= */
+
+    backgroundMusic.addEventListener(
+        "error",
+        function () {
+
+            console.error(
+                "ไม่พบไฟล์เพลง:",
+                backgroundMusic.src
+            );
+
+            if (musicLabel) {
+                musicLabel.textContent =
+                    "FILE ERROR";
+            }
+
+        }
+    );
+
+});
