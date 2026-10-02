@@ -1,272 +1,385 @@
-```javascript
 /* =====================================
    BUALUANG 101
    MAIN JAVASCRIPT
+   SAFE VERSION
 ===================================== */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-/* =========================
-   LOADER
-========================= */
+  /* =========================
+     ELEMENTS
+  ========================= */
 
-window.addEventListener("load", () => {
-
+  const header = document.getElementById("header");
   const loader = document.getElementById("loader");
 
-  setTimeout(() => {
-    loader.classList.add("hide");
-  }, 700);
+  const menuButton =
+    document.getElementById("menuButton");
 
-});
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+  const heroNumber =
+    document.querySelector(".hero-number");
 
 
-/* =========================
-   HEADER SCROLL
-========================= */
+  /* =========================
+     LOADER
+  ========================= */
 
-const header = document.getElementById("header");
+  if (loader) {
 
-window.addEventListener("scroll", () => {
+    // ให้หน้าเว็บแสดงแน่นอน แม้ JavaScript ส่วนอื่นมีปัญหา
+    setTimeout(() => {
 
-  if (window.scrollY > 40) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
+      loader.classList.add("hide");
+
+    }, 700);
+
+    // ลบ loader ออกจาก DOM หลัง animation
+    setTimeout(() => {
+
+      if (loader) {
+        loader.style.display = "none";
+      }
+
+    }, 1600);
+
   }
 
-});
+
+  /* =========================
+     HEADER SCROLL
+  ========================= */
+
+  function updateHeader() {
+
+    if (!header) return;
+
+    if (window.scrollY > 40) {
+
+      header.classList.add("scrolled");
+
+    } else {
+
+      header.classList.remove("scrolled");
+
+    }
+
+  }
+
+  window.addEventListener(
+    "scroll",
+    updateHeader,
+    { passive: true }
+  );
+
+  updateHeader();
 
 
-/* =========================
-   MOBILE MENU
-========================= */
+  /* =========================
+     MOBILE MENU
+  ========================= */
 
-const menuButton = document.getElementById("menuButton");
-const mobileMenu = document.getElementById("mobileMenu");
+  function closeMenu() {
 
-function toggleMenu() {
+    if (menuButton) {
+      menuButton.classList.remove("active");
+    }
 
-  menuButton.classList.toggle("active");
-  mobileMenu.classList.toggle("open");
+    if (mobileMenu) {
+      mobileMenu.classList.remove("open");
+    }
 
-  document.body.classList.toggle("menu-open");
-
-}
-
-menuButton.addEventListener("click", toggleMenu);
-
-
-/* Close menu when clicking links */
-
-const mobileLinks =
-  document.querySelectorAll(".mobile-menu a");
-
-mobileLinks.forEach(link => {
-
-  link.addEventListener("click", () => {
-
-    menuButton.classList.remove("active");
-    mobileMenu.classList.remove("open");
     document.body.classList.remove("menu-open");
+
+  }
+
+
+  function toggleMenu() {
+
+    if (!menuButton || !mobileMenu) return;
+
+    menuButton.classList.toggle("active");
+
+    mobileMenu.classList.toggle("open");
+
+    document.body.classList.toggle(
+      "menu-open"
+    );
+
+  }
+
+
+  if (menuButton) {
+
+    menuButton.addEventListener(
+      "click",
+      toggleMenu
+    );
+
+  }
+
+
+  /* =========================
+     MOBILE MENU LINKS
+  ========================= */
+
+  const mobileLinks =
+    document.querySelectorAll(
+      ".mobile-menu a"
+    );
+
+  mobileLinks.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      closeMenu
+    );
 
   });
 
-});
+
+  /* =========================
+     SCROLL REVEAL
+  ========================= */
+
+  const revealElements =
+    document.querySelectorAll(
+      ".reveal"
+    );
 
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+  if (
+    revealElements.length > 0 &&
+    "IntersectionObserver" in window
+  ) {
 
-const revealElements =
-  document.querySelectorAll(".reveal");
+    const revealObserver =
+      new IntersectionObserver(
+        entries => {
 
-const revealObserver =
-  new IntersectionObserver(
-    entries => {
+          entries.forEach(entry => {
 
-      entries.forEach(entry => {
+            if (
+              entry.isIntersecting
+            ) {
 
-        if (entry.isIntersecting) {
+              entry.target.classList.add(
+                "visible"
+              );
 
-          entry.target.classList.add("visible");
+              revealObserver.unobserve(
+                entry.target
+              );
 
-          revealObserver.unobserve(entry.target);
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
+        }
+      );
+
+
+    revealElements.forEach(element => {
+
+      revealObserver.observe(
+        element
+      );
+
+    });
+
+  } else {
+
+    // Fallback สำหรับ browser ที่ไม่รองรับ
+    revealElements.forEach(element => {
+
+      element.classList.add(
+        "visible"
+      );
+
+    });
+
+  }
+
+
+  /* =========================
+     SMOOTH ANCHOR SCROLL
+  ========================= */
+
+  const anchorLinks =
+    document.querySelectorAll(
+      'a[href^="#"]'
+    );
+
+
+  anchorLinks.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      event => {
+
+        const targetID =
+          link.getAttribute("href");
+
+
+        // "#" เฉย ๆ ไม่ต้องทำอะไร
+        if (
+          !targetID ||
+          targetID === "#"
+        ) {
+          return;
+        }
+
+
+        let target = null;
+
+        try {
+
+          target =
+            document.querySelector(
+              targetID
+            );
+
+        } catch (error) {
+
+          return;
 
         }
 
-      });
 
-    },
-    {
-      threshold: 0.12
-    }
-  );
+        if (!target) return;
 
 
-revealElements.forEach(element => {
-  revealObserver.observe(element);
-});
+        event.preventDefault();
 
 
-/* =========================
-   SMOOTH ANCHOR SCROLL
-========================= */
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-  link.addEventListener("click", event => {
-
-    const targetID =
-      link.getAttribute("href");
-
-    const target =
-      document.querySelector(targetID);
-
-    if (!target) return;
-
-    event.preventDefault();
-
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+      }
+    );
 
   });
 
-});
+
+  /* =========================
+     HERO PARALLAX
+  ========================= */
+
+  if (heroNumber) {
+
+    let ticking = false;
 
 
-/* =========================
-   HERO PARALLAX
-========================= */
+    function updateParallax() {
 
-const heroNumber =
-  document.querySelector(".hero-number");
+      const scrollY =
+        window.scrollY;
 
-window.addEventListener("scroll", () => {
 
-  if (!heroNumber) return;
+      if (
+        scrollY <
+        window.innerHeight
+      ) {
 
-  const scrollY = window.scrollY;
+        heroNumber.style.transform =
+          `translate3d(0, ${scrollY * 0.12}px, 0)`;
 
-  if (scrollY < window.innerHeight) {
+      }
 
-    heroNumber.style.transform =
-      `translateY(${scrollY * 0.12}px)`;
+
+      ticking = false;
+
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        if (!ticking) {
+
+          window.requestAnimationFrame(
+            updateParallax
+          );
+
+          ticking = true;
+
+        }
+
+      },
+      { passive: true }
+    );
 
   }
 
-});
+
+  /* =========================
+     ACTIVITY CARD TILT
+  ========================= */
+
+  const cards =
+    document.querySelectorAll(
+      ".activity-card"
+    );
 
 
-/* =========================
-   ACTIVITY CARD TILT
-========================= */
+  cards.forEach(card => {
 
-const cards =
-  document.querySelectorAll(".activity-card");
+    card.addEventListener(
+      "mousemove",
+      event => {
 
-cards.forEach(card => {
-
-  card.addEventListener("mousemove", event => {
-
-    if (window.innerWidth < 900) return;
-
-    const rect =
-      card.getBoundingClientRect();
-
-    const x =
-      event.clientX - rect.left;
-
-    const y =
-      event.clientY - rect.top;
-
-    const centerX =
-      rect.width / 2;
-
-    const centerY =
-      rect.height / 2;
-
-    const rotateX =
-      ((y - centerY) / centerY) * -2;
-
-    const rotateY =
-      ((x - centerX) / centerX) * 2;
-
-    card.style.transform =
-      `perspective(900px)
-       rotateX(${rotateX}deg)
-       rotateY(${rotateY}deg)
-       translateY(-8px)`;
-
-  });
+        if (
+          window.innerWidth < 900
+        ) {
+          return;
+        }
 
 
-  card.addEventListener("mouseleave", () => {
-
-    card.style.transform = "";
-
-  });
-
-});
+        const rect =
+          card.getBoundingClientRect();
 
 
-/* =========================
-   ACTIVE NAV
-========================= */
-
-const sections =
-  document.querySelectorAll("section[id]");
-
-const navLinks =
-  document.querySelectorAll(".desktop-nav a");
-
-window.addEventListener("scroll", () => {
-
-  let current = "";
-
-  sections.forEach(section => {
-
-    const sectionTop =
-      section.offsetTop - 150;
-
-    if (window.scrollY >= sectionTop) {
-      current = section.getAttribute("id");
-    }
-
-  });
+        const x =
+          event.clientX -
+          rect.left;
 
 
-  navLinks.forEach(link => {
-
-    link.classList.remove("active");
-
-    const href =
-      link.getAttribute("href");
-
-    if (href === `#${current}`) {
-      link.classList.add("active");
-    }
-
-  });
-
-});
+        const y =
+          event.clientY -
+          rect.top;
 
 
-/* =========================
-   KEYBOARD ESCAPE
-========================= */
+        const centerX =
+          rect.width / 2;
 
-document.addEventListener("keydown", event => {
 
-  if (event.key === "Escape") {
+        const centerY =
+          rect.height / 2;
 
-    menuButton.classList.remove("active");
-    mobileMenu.classList.remove("open");
-    document.body.classList.remove("menu-open");
 
-  }
+        const rotateX =
+          ((y - centerY) /
+            centerY) * -2;
 
-});
-```
+
+        const rotateY =
+          ((x - centerX) /
+            centerX) * 2;
+
+
+        card.style.transform =
+          `
+          perspective(900px)
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
+          translateY(-8px)
+          `;
