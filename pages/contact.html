@@ -1,1 +1,360 @@
+```html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact — Bualuang 101</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+
+    .contact-page {
+      min-height: 100vh;
+      padding: 180px 0 120px;
+      background: var(--off-white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+    }
+
+    .contact-heading h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 9rem);
+      font-weight: 900;
+      line-height: .8;
+      letter-spacing: -.09em;
+    }
+
+    .contact-heading h1 span {
+      display: block;
+      color: var(--blue);
+    }
+
+    .contact-heading p {
+      margin-top: 45px;
+      max-width: 450px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .contact-form {
+      background: var(--white);
+      padding: 45px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 9px;
+
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+
+      border: 0;
+      border-bottom: 2px solid var(--border);
+
+      padding: 14px 0;
+
+      background: transparent;
+
+      outline: none;
+
+      font-family: var(--font-body);
+      font-size: 15px;
+
+      transition: border-color .3s ease;
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .submit-button {
+      width: 100%;
+
+      border: 0;
+      padding: 18px;
+
+      background: var(--navy);
+      color: var(--white);
+
+      cursor: pointer;
+
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .15em;
+
+      transition: .3s ease;
+    }
+
+    .submit-button:hover {
+      background: var(--blue);
+    }
+
+    @media (max-width: 800px) {
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .contact-page {
+        padding-top: 130px;
+      }
+
+      .contact-form {
+        padding: 25px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <a href="../index.html" class="brand">
+
+    <span class="brand-top">
+      BUALUANG
+    </span>
+
+    <span class="brand-bottom">
+      ดาวเด่นบัวหลวง <b>101</b>
+    </span>
+
+  </a>
+
+  <nav class="desktop-nav">
+
+    <a href="../index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="schedule.html">SCHEDULE</a>
+    <a href="activities.html">ACTIVITIES</a>
+    <a href="participants.html">PEOPLE</a>
+    <a href="news.html">NEWS</a>
+
+  </nav>
+
+  <a href="../index.html" class="header-button">
+    HOME ↗
+  </a>
+
+</header>
+
+
+<main>
+
+<section class="contact-page">
+
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <div class="contact-heading">
+
+        <div class="section-label">
+          CONTACT / 01
+        </div>
+
+        <h1>
+          LET'S
+          <span>TALK.</span>
+        </h1>
+
+        <p>
+          หากต้องการสอบถามข้อมูลเพิ่มเติม
+          หรือติดต่อเกี่ยวกับโครงการ
+          สามารถส่งข้อความผ่านแบบฟอร์มได้
+        </p>
+
+      </div>
+
+
+      <form
+        class="contact-form"
+        action="mailto:example@email.com"
+        method="post"
+        enctype="text/plain"
+      >
+
+        <div class="form-group">
+
+          <label for="name">
+            NAME
+          </label>
+
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="ชื่อของคุณ"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="email">
+            EMAIL
+          </label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="your@email.com"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="subject">
+            SUBJECT
+          </label>
+
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder="หัวข้อที่ต้องการติดต่อ"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="message">
+            MESSAGE
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            placeholder="เขียนข้อความของคุณ..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="submit-button"
+        >
+          SEND MESSAGE ↗
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <div class="footer-logo">
+          BUALUANG <span>101</span>
+        </div>
+
+        <p>
+          ดาวเด่นบัวหลวง 101
+        </p>
+
+      </div>
+
+      <div class="footer-links">
+
+        <div>
+
+          <small>NAVIGATION</small>
+
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="schedule.html">Schedule</a>
+
+        </div>
+
+        <div>
+
+          <small>MORE</small>
+
+          <a href="activities.html">Activities</a>
+          <a href="participants.html">People</a>
+          <a href="news.html">News</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>© BUALUANG 101</span>
+
+      <span>CREATE · CONNECT · INSPIRE</span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
+```
 
