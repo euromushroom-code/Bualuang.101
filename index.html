@@ -751,5 +751,51 @@
 
     <script src="js/script.js"></script>
 
+    <!-- =====================================
+     MUSIC PLAYER
+===================================== -->
+
+<div class="music-player" id="musicPlayer">
+
+    <button
+        class="music-button"
+        id="musicButton"
+        type="button"
+        aria-label="Play music"
+        aria-pressed="false"
+    >
+
+        <span class="music-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+
+        <span class="music-label" id="musicLabel">
+            SOUND OFF
+        </span>
+
+    </button>
+
+    <div class="music-info">
+        <span class="music-line"></span>
+
+        <div>
+            <small>BUALUANG 101</small>
+            <strong>ORIGINAL SOUND</strong>
+        </div>
+    </div>
+
+</div>
+
+
+<audio
+    id="backgroundMusic"
+    src="assets/audio/bualuang-101.mp3"
+    loop
+    preload="metadata"
+></audio>
+    
 </body>
 </html>
