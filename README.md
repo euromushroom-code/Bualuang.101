@@ -1,31 +1,34 @@
 
-# BUALUANG 101
+# BUALUANG 101 — ดาวเด่นบัวหลวง
 
-## Architecture
+A Thai-first website for BUALUANG 101, a space for a new generation to learn, create, and grow through contemporary art and shared experiences.
 
-This is a Thai-first contemporary art program website using TanStack Start, React 19, TypeScript, Vite, and Netlify. It is a public informational marketing site, not an application that collects or stores visitor data.
+The site includes an editorial landing page, expandable program schedule, filterable conceptual art gallery with detail dialogs, news notes, frequently asked questions, and direct contact and social links. It adapts to mobile screens, supports keyboard navigation and reduced motion, and includes an optional original ambient tone without autoplay.
 
-## Key files
+## Technologies
 
-- `src/routes/index.tsx`: single-page experience, navigation, schedule, conceptual gallery, news, FAQ, social links, and optional ambient tone.
-- `src/routes/__root.tsx`: Thai document language, metadata, fonts, favicon, and application shell. Keep `siteName` and `siteDescription` product-specific. Do not add an Open Graph image; the platform supplies it.
-- `src/styles.css`: design tokens, editorial layouts, interactive states, responsive breakpoints, and reduced-motion behavior.
-- `public/img/art-sculpture.png`: generated abstract artwork, served through Netlify Image CDN. It is an illustration, not a photograph of a real event or participant.
-- `public/favicon.svg`: branded favicon.
-- `netlify.toml`: deployment and local development configuration.
+- TanStack Start and TanStack Router
+- React 19 and TypeScript
+- Vite and Tailwind CSS 4 with custom CSS
+- Lucide icons
+- Netlify deployment and Image CDN
+- Google Fonts: Manrope, DM Sans, and Noto Sans Thai
 
-## Conventions
+## Local development
 
-Use function components, React hooks, descriptive identifiers, and strict TypeScript. Keep Thai explanatory copy paired with English editorial headings. Use CSS variables for the navy, blue, yellow, and paper palette. Keep keyboard focus, mobile menu focus containment, native details elements, dialog accessibility, and reduced-motion support intact. Never hide essential content until JavaScript or an animation finishes.
+Use Node.js 22 or newer and pnpm.
 
-## Content decisions
+```bash
+pnpm install
+netlify dev --port 8889
+```
 
-Program dates and social addresses came from the supplied page. Additional text explains the creative journey without inventing selection criteria, prices, participant names, venues, or awards. Gallery entries are explicitly conceptual explorations, not submitted participant work. Changes to confirmed event information should come from the project owner.
+Netlify starts the Vite development process using the settings in `netlify.toml`. The production build is managed by the deployment pipeline.
 
-Contact uses the supplied email and social accounts. There is no signup form, authentication, or database. If future work requires persistence or form submissions, read and use the relevant Netlify skills.
+## Updating content
 
-The original audio file was not supplied. The optional sound control synthesizes a quiet original ambient chord through the Web Audio API, only after a user gesture. Do not add copyrighted audio or autoplay.
+Edit `src/routes/index.tsx` for program details, news, FAQ answers, and social links. Update metadata in `src/routes/__root.tsx`. Visual styles and breakpoints live in `src/styles.css`.
 
-## Development
+The supplied October–November 2026 schedule is retained; confirm any additional venue, eligibility, application, or presentation information before publishing it. The gallery uses conceptual artwork and does not represent real participant submissions.
 
-Install with `pnpm install`. Start locally with `netlify dev --port 8889`. The deployment pipeline handles production builds. No build, test, type-check, or dev-server validation commands were run during the initial implementation, as required by the project environment.
+The hero artwork is a static generated illustration in `public/img`, optimized through Netlify Image CDN. No AI inference occurs when visitors use the site. The original music file was not included, so the sound control instead generates an optional quiet ambient chord in the browser. Contact links use the supplied project email; there is no data collection or database.
