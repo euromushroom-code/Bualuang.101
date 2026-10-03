@@ -28,6 +28,298 @@
 
 <style>
 
+    /* =========================================
+   BUALUANG 101 — ART GALLERY
+========================================= */
+
+.works-section {
+    position: relative;
+    padding: 150px 5vw 120px;
+    background: #ffffff;
+    color: #071b52;
+    overflow: hidden;
+}
+
+.works-top {
+    display: grid;
+    grid-template-columns: 80px 1fr 280px;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 90px;
+}
+
+.works-number {
+    font-family: "Manrope", sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.works-heading {
+    position: relative;
+}
+
+.works-eyebrow {
+    display: block;
+    margin-bottom: 16px;
+    font-family: "Manrope", sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+}
+
+.works-heading h2 {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(70px, 12vw, 190px);
+    line-height: .72;
+    font-weight: 900;
+    letter-spacing: -.08em;
+}
+
+.works-heading h2 span {
+    color: #f4cf00;
+}
+
+.works-intro {
+    border-left: 1px solid rgba(7,27,82,.25);
+    padding-left: 25px;
+    padding-bottom: 8px;
+}
+
+.works-intro p {
+    margin: 0;
+    max-width: 250px;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(7,27,82,.68);
+}
+
+
+/* GRID */
+
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 55px 28px;
+}
+
+.art-card {
+    grid-column: span 4;
+    margin: 0;
+}
+
+.art-card-large {
+    grid-column: span 7;
+}
+
+.art-card-wide {
+    grid-column: span 8;
+}
+
+.art-image {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: #071b52;
+}
+
+.art-card-large .art-image {
+    height: 690px;
+}
+
+.art-card-wide .art-image {
+    height: 520px;
+}
+
+.art-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition:
+        transform .8s cubic-bezier(.2,.7,.2,1),
+        filter .5s ease;
+}
+
+.art-card:hover .art-image img {
+    transform: scale(1.035);
+    filter: saturate(1.08);
+}
+
+.art-index {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    background: #f4cf00;
+    color: #071b52;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.art-card figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #071b52;
+}
+
+.art-card figcaption span,
+.art-card figcaption strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.art-card figcaption span {
+    opacity: .55;
+}
+
+.art-card figcaption strong {
+    text-align: right;
+    font-weight: 800;
+}
+
+
+/* FOOTER LINE */
+
+.works-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+
+    margin-top: 100px;
+    padding-top: 18px;
+
+    border-top: 1px solid #071b52;
+
+    font-family: "Manrope", sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .15em;
+}
+
+.works-footer span:nth-child(2) {
+    text-align: center;
+}
+
+.works-footer span:last-child {
+    text-align: right;
+    color: #071b52;
+}
+
+
+/* YELLOW ART MARK */
+
+.works-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 14px;
+
+    right: 5vw;
+    top: 125px;
+
+    background: #f4cf00;
+
+    transform: rotate(-2deg);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .works-section {
+        padding: 100px 20px 80px;
+    }
+
+    .works-top {
+        grid-template-columns: 40px 1fr;
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+
+    .works-intro {
+        grid-column: 2;
+        margin-top: 20px;
+    }
+
+    .art-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .art-card,
+    .art-card-large,
+    .art-card-wide {
+        grid-column: 1;
+    }
+
+    .art-image,
+    .art-card-large .art-image,
+    .art-card-wide .art-image {
+        height: 480px;
+    }
+
+    .works-footer {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .works-footer span:nth-child(2),
+    .works-footer span:last-child {
+        text-align: left;
+    }
+
+    .works-section::after {
+        display: none;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .works-heading h2 {
+        font-size: 74px;
+    }
+
+    .art-image,
+    .art-card-large .art-image,
+    .art-card-wide .art-image {
+        height: 390px;
+    }
+
+    .art-card figcaption {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .art-card figcaption strong {
+        text-align: left;
+    }
+}
+
 /* =========================================================
    BUALUANG 101
    COMPLETE SINGLE FILE VERSION
