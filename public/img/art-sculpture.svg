@@ -1,1 +1,12 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Abstract sculpture illustration">
+  <rect width="1000" height="1000" fill="#050b17"/>
+  <circle cx="560" cy="430" r="300" fill="#2458ff"/>
+  <circle cx="560" cy="430" r="300" fill="none" stroke="#ffe01b" stroke-width="3" stroke-dasharray="6 14"/>
+  <path d="M250 820 L430 300 L610 820 Z" fill="#f1f0e9"/>
+  <path d="M430 300 L610 820 L690 820 Z" fill="#c9c8c0"/>
+  <rect x="640" y="250" width="150" height="570" fill="#ffe01b"/>
+  <rect x="640" y="250" width="40" height="570" fill="#d9bd00"/>
+  <circle cx="300" cy="260" r="70" fill="none" stroke="#f1f0e9" stroke-width="6"/>
+  <path d="M120 880 H900" stroke="#f1f0e9" stroke-width="4"/>
+  <path d="M830 160 l14 40 40 14 -40 14 -14 40 -14 -40 -40 -14 40 -14z" fill="#ffe01b"/>
+</svg>
