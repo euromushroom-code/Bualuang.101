@@ -1,3075 +1,697 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>BUALUANG 101 — ดาวเด่นบัวหลวง</title>
-
-    <meta
-        name="description"
-        content="BUALUANG 101 — พื้นที่แห่งการเรียนรู้ การสร้างสรรค์ และการเติบโตสำหรับคนรุ่นใหม่"
-    >
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUALUANG 101 — ดาวเด่นบัวหลวง</title>
+<meta name="description" content="BUALUANG 101 — พื้นที่แห่งการเรียนรู้ การสร้างสรรค์ และการเติบโตสำหรับคนรุ่นใหม่">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-/* =========================================================
-   BUALUANG 101
-   COMPLETE SINGLE FILE VERSION
-========================================================= */
-
-:root {
-
-    --navy: #071a3d;
-    --navy-dark: #031027;
-
-    --blue: #1557ff;
-    --blue-light: #4f7dff;
-
-    --yellow: #ffd928;
-    --yellow-light: #ffe979;
-
-    --white: #ffffff;
-    --paper: #f5f6f8;
-
-    --black: #050912;
-
-    --gray: #6d7480;
-
-    --line: rgba(7, 26, 61, .14);
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-
-    background: var(--paper);
-
-    color: var(--navy);
-
-    font-family:
-        "DM Sans",
-        "Noto Sans Thai",
-        sans-serif;
-
-    overflow-x: hidden;
-
-}
-
-body.menu-open {
-    overflow: hidden;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-
-/* =========================================================
-   GRAIN
-========================================================= */
-
-body::after {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 9998;
-
-    opacity: .055;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-
-    animation: grainMove .2s steps(2) infinite;
-
-}
-
-@keyframes grainMove {
-
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(-2%, 1%);
-    }
-
-    50% {
-        transform: translate(1%, -2%);
-    }
-
-    75% {
-        transform: translate(2%, 2%);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
-
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-.loader {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 99999;
-
-    background: var(--navy);
-
-    color: var(--white);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    animation:
-        loaderOut .8s ease
-        1.2s forwards;
-
-    pointer-events: none;
-
-}
-
-.loader-number {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(120px, 24vw, 320px);
-
-    font-weight: 800;
-
-    line-height: .7;
-
-    letter-spacing: -.1em;
-
-    color: var(--yellow);
-
-}
-
-.loader-line {
-
-    width: 120px;
-
-    height: 1px;
-
-    background: rgba(255,255,255,.2);
-
-    margin-top: 42px;
-
-    overflow: hidden;
-
-}
-
-.loader-line span {
-
-    display: block;
-
-    width: 100%;
-
-    height: 100%;
-
-    background: var(--yellow);
-
-    transform: translateX(-100%);
-
-    animation:
-        loaderProgress 1.1s ease forwards;
-
-}
-
-.loader-title {
-
-    margin-top: 20px;
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 11px;
-
-    letter-spacing: .12em;
-
-    opacity: .7;
-
-}
-
-@keyframes loaderProgress {
-
-    to {
-        transform: translateX(0);
-    }
-
-}
-
-@keyframes loaderOut {
-
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    80% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-
-    position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 82px;
-
-    z-index: 5000;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        0 clamp(20px, 4vw, 64px);
-
-    color: var(--white);
-
-    transition:
-        background .35s ease,
-        color .35s ease,
-        height .35s ease;
-
-}
-
-.header.scrolled {
-
-    height: 68px;
-
-    background:
-        rgba(7,26,61,.94);
-
-    backdrop-filter: blur(14px);
-
-}
-
-.logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: -.03em;
-
-}
-
-.logo-mark {
-
-    width: 32px;
-
-    height: 32px;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    display: grid;
-
-    place-items: center;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-}
-
-.logo-text {
-
-    display: flex;
-
-    flex-direction: column;
-
-    line-height: 1.05;
-
-}
-
-.logo-text strong {
-
-    font-size: 14px;
-
-}
-
-.logo-text span {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 8px;
-
-    opacity: .65;
-
-    margin-top: 3px;
-
-}
-
-.desktop-nav {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: clamp(18px, 3vw, 42px);
-
-}
-
-.desktop-nav a {
-
-    position: relative;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: .13em;
-
-    text-transform: uppercase;
-
-    opacity: .75;
-
-    transition: opacity .25s ease;
-
-}
-
-.desktop-nav a:hover,
-.desktop-nav a.active {
-
-    opacity: 1;
-
-}
-
-.desktop-nav a::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: -8px;
-
-    width: 100%;
-
-    height: 2px;
-
-    background: var(--yellow);
-
-    transform: scaleX(0);
-
-    transform-origin: left;
-
-    transition: transform .25s ease;
-
-}
-
-.desktop-nav a:hover::after,
-.desktop-nav a.active::after {
-
-    transform: scaleX(1);
-
-}
-
-.menu-button {
-
-    display: none;
-
-    width: 42px;
-
-    height: 42px;
-
-    border: 1px solid rgba(255,255,255,.3);
-
-    background: transparent;
-
-    color: white;
-
-    cursor: pointer;
-
-}
-
-.menu-button span {
-
-    display: block;
-
-    width: 18px;
-
-    height: 1px;
-
-    background: currentColor;
-
-    margin: 4px auto;
-
-    transition: transform .3s ease;
-
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-.mobile-menu {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 4500;
-
-    background: var(--navy);
-
-    color: white;
-
-    padding: 130px 28px 40px;
-
-    transform: translateX(100%);
-
-    transition: transform .5s cubic-bezier(.77,0,.18,1);
-
-}
-
-.mobile-menu.open {
-
-    transform: translateX(0);
-
-}
-
-.mobile-menu nav {
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-.mobile-menu a {
-
-    padding: 20px 0;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.12);
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 34px;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    position: relative;
-
-    min-height: 100svh;
-
-    background: var(--navy);
-
-    color: var(--white);
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    padding:
-        150px clamp(24px, 6vw, 100px)
-        60px;
-
-}
-
-.hero-grid {
-
-    position: absolute;
-
-    inset: 0;
-
-    opacity: .16;
-
-    background-image:
-
-        linear-gradient(
-            rgba(255,255,255,.14) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.14) 1px,
-            transparent 1px
-        );
-
-    background-size: 80px 80px;
-
-}
-
-.hero-yellow {
-
-    position: absolute;
-
-    width: 34vw;
-
-    height: 34vw;
-
-    max-width: 520px;
-
-    max-height: 520px;
-
-    right: -8vw;
-
-    top: 18%;
-
-    border-radius: 50%;
-
-    background: var(--yellow);
-
-    opacity: .96;
-
-    mix-blend-mode: screen;
-
-}
-
-.hero-blue-shape {
-
-    position: absolute;
-
-    width: 24vw;
-
-    height: 70vh;
-
-    right: 14%;
-
-    top: 8%;
-
-    background: var(--blue);
-
-    transform: rotate(18deg);
-
-    opacity: .85;
-
-}
-
-.hero-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-}
-
-.hero-kicker {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing: .2em;
-
-    text-transform: uppercase;
-
-    margin-bottom: 35px;
-
-}
-
-.hero-kicker::before {
-
-    content: "";
-
-    width: 45px;
-
-    height: 1px;
-
-    background: var(--yellow);
-
-}
-
-.hero-title {
-
-    position: relative;
-
-    z-index: 3;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(70px, 14vw, 190px);
-
-    line-height: .77;
-
-    font-weight: 800;
-
-    letter-spacing: -.085em;
-
-    text-transform: uppercase;
-
-}
-
-.hero-title .outline {
-
-    color: transparent;
-
-    -webkit-text-stroke:
-        1.5px rgba(255,255,255,.85);
-
-}
-
-.hero-number {
-
-    position: absolute;
-
-    z-index: 1;
-
-    right: 4vw;
-
-    bottom: -5vw;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(260px, 48vw, 720px);
-
-    font-weight: 800;
-
-    line-height: .7;
-
-    letter-spacing: -.12em;
-
-    color: transparent;
-
-    -webkit-text-stroke:
-        2px rgba(255,255,255,.18);
-
-    pointer-events: none;
-
-}
-
-.hero-bottom {
-
-    position: relative;
-
-    z-index: 4;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    margin-top: 65px;
-
-}
-
-.hero-description {
-
-    max-width: 390px;
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-
-    color: rgba(255,255,255,.7);
-
-}
-
-.hero-date {
-
-    text-align: right;
-
-}
-
-.hero-date span {
-
-    display: block;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 9px;
-
-    letter-spacing: .15em;
-
-    opacity: .55;
-
-    margin-bottom: 7px;
-
-}
-
-.hero-date strong {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 15px;
-
-    letter-spacing: .04em;
-
-}
-
-
-/* =========================================================
-   MARQUEE
-========================================================= */
-
-.marquee {
-
-    overflow: hidden;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    border-bottom:
-        1px solid var(--navy);
-
-}
-
-.marquee-track {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 28px;
-
-    width: max-content;
-
-    padding: 18px 0;
-
-    animation:
-        marqueeMove 24s linear infinite;
-
-}
-
-.marquee-track span {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    letter-spacing: .13em;
-
-    white-space: nowrap;
-
-}
-
-.marquee-track b {
-
-    display: block;
-
-    width: 38px;
-
-    height: 1px;
-
-    background: currentColor;
-
-    opacity: .45;
-
-    flex-shrink: 0;
-
-}
-
-@keyframes marqueeMove {
-
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
-
-}
-
-
-/* =========================================================
-   GENERAL SECTION
-========================================================= */
-
-.section {
-
-    position: relative;
-
-    padding:
-        clamp(90px, 12vw, 180px)
-        clamp(24px, 6vw, 100px);
-
-}
-
-.section-dark {
-
-    background: var(--navy);
-
-    color: white;
-
-}
-
-.section-label {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    margin-bottom: 50px;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: .18em;
-
-}
-
-.section-label::before {
-
-    content: "";
-
-    width: 35px;
-
-    height: 1px;
-
-    background: var(--yellow);
-
-}
-
-.section-heading {
-
-    max-width: 1000px;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(48px, 8vw, 120px);
-
-    line-height: .9;
-
-    letter-spacing: -.07em;
-
-    font-weight: 800;
-
-}
-
-.section-heading span {
-
-    color: var(--blue);
-
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about {
-
-    background: var(--paper);
-
-    background-image:
-
-        linear-gradient(
-            rgba(7,26,61,.055) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(7,26,61,.055) 1px,
-            transparent 1px
-        );
-
-    background-size: 75px 75px;
-
-}
-
-.about-layout {
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.4fr)
-        minmax(260px, .6fr);
-
-    gap: 10vw;
-
-    align-items: end;
-
-}
-
-.about-text {
-
-    margin-top: 55px;
-
-    max-width: 650px;
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 16px;
-
-    line-height: 2;
-
-    color: #343d4c;
-
-}
-
-.about-side {
-
-    border-top:
-        1px solid var(--line);
-
-    padding-top: 18px;
-
-}
-
-.about-side p {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 12px;
-
-    line-height: 1.9;
-
-    color: var(--gray);
-
-}
-
-
-/* =========================================================
-   PROGRAM
-========================================================= */
-
-.program {
-
-    background: var(--white);
-
-}
-
-.program-list {
-
-    border-top:
-        1px solid var(--line);
-
-}
-
-.program-row {
-
-    display: grid;
-
-    grid-template-columns:
-        100px 1fr 180px;
-
-    gap: 30px;
-
-    align-items: center;
-
-    padding: 30px 0;
-
-    border-bottom:
-        1px solid var(--line);
-
-    transition:
-        padding .3s ease,
-        background .3s ease;
-
-}
-
-.program-row:hover {
-
-    padding-left: 20px;
-
-    background: var(--yellow);
-
-}
-
-.program-number {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: .1em;
-
-}
-
-.program-name {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 20px;
-
-    font-weight: 600;
-
-}
-
-.program-date {
-
-    text-align: right;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 10px;
-
-    letter-spacing: .1em;
-
-}
-
-
-/* =========================================================
-   WORKS
-========================================================= */
-
-.works {
-
-    background: var(--navy);
-
-    color: white;
-
-    overflow: hidden;
-
-}
-
-.works-intro {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    gap: 40px;
-
-    margin-bottom: 70px;
-
-}
-
-.works-intro p {
-
-    max-width: 370px;
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-
-    color: rgba(255,255,255,.62);
-
-}
-
-.art-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1.1fr .9fr;
-
-    gap: 20px;
-
-}
-
-.art-card {
-
-    position: relative;
-
-    min-height: 420px;
-
-    overflow: hidden;
-
-    background: #0b2b61;
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    transition:
-        transform .35s ease;
-
-}
-
-.art-card:nth-child(2) {
-
-    margin-top: 100px;
-
-}
-
-.art-card:nth-child(3) {
-
-    margin-top: -40px;
-
-}
-
-.art-visual {
-
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-}
-
-.art-one {
-
-    background:
-
-        linear-gradient(
-            130deg,
-            var(--blue) 0%,
-            var(--blue) 45%,
-            var(--yellow) 45%,
-            var(--yellow) 70%,
-            var(--navy) 70%
-        );
-
-}
-
-.art-two {
-
-    background:
-
-        linear-gradient(
-            35deg,
-            var(--yellow) 0%,
-            var(--yellow) 35%,
-            var(--blue) 35%,
-            var(--blue) 72%,
-            #fff 72%
-        );
-
-}
-
-.art-three {
-
-    background:
-
-        linear-gradient(
-            115deg,
-            #fff 0%,
-            #fff 32%,
-            var(--blue) 32%,
-            var(--blue) 62%,
-            var(--yellow) 62%
-        );
-
-}
-
-.art-number {
-
-    position: absolute;
-
-    left: 30px;
-
-    top: 25px;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 11px;
-
-    letter-spacing: .15em;
-
-}
-
-.art-big {
-
-    position: absolute;
-
-    right: 25px;
-
-    bottom: -20px;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 180px;
-
-    font-weight: 800;
-
-    line-height: .8;
-
-    letter-spacing: -.1em;
-
-    color: rgba(7,26,61,.15);
-
-}
-
-.art-info {
-
-    position: absolute;
-
-    left: 30px;
-
-    right: 30px;
-
-    bottom: 25px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    color: var(--navy);
-
-}
-
-.art-info h3 {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 15px;
-
-}
-
-.art-info span {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 8px;
-
-    letter-spacing: .13em;
-
-}
-
-
-/* =========================================================
-   STATEMENT
-========================================================= */
-
-.statement {
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    min-height: 70vh;
-
-    display: flex;
-
-    align-items: center;
-
-}
-
-.statement-text {
-
-    max-width: 1200px;
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(42px, 7vw, 105px);
-
-    font-weight: 800;
-
-    line-height: .95;
-
-    letter-spacing: -.07em;
-
-}
-
-.statement-text em {
-
-    color: white;
-
-    font-style: normal;
-
-    -webkit-text-stroke:
-        1px var(--navy);
-
-}
-
-
-/* =========================================================
-   NEWS
-========================================================= */
-
-.news {
-
-    background: var(--paper);
-
-}
-
-.news-list {
-
-    border-top:
-        1px solid var(--line);
-
-}
-
-.news-item {
-
-    display: grid;
-
-    grid-template-columns:
-        90px 1fr 120px;
-
-    gap: 30px;
-
-    align-items: center;
-
-    padding: 28px 0;
-
-    border-bottom:
-        1px solid var(--line);
-
-}
-
-.news-index {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-}
-
-.news-title {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 17px;
-
-    font-weight: 600;
-
-}
-
-.news-date {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 9px;
-
-    letter-spacing: .1em;
-
-    text-align: right;
-
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.cta {
-
-    background: var(--blue);
-
-    color: white;
-
-    min-height: 55vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 60px;
-
-}
-
-.cta h2 {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size:
-        clamp(60px, 10vw, 150px);
-
-    line-height: .78;
-
-    letter-spacing: -.08em;
-
-    font-weight: 800;
-
-}
-
-.cta-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-width: 190px;
-
-    padding: 18px 25px;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: .14em;
-
-    transition:
-        transform .25s ease,
-        background .25s ease;
-
-}
-
-.cta-button:hover {
-
-    transform: translateY(-5px);
-
-    background: white;
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-
-    background: var(--navy-dark);
-
-    color: white;
-
-    padding:
-        40px clamp(24px, 6vw, 100px);
-
-}
-
-.footer-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 40px;
-
-    padding-bottom: 50px;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.12);
-
-}
-
-.footer-brand {
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 35px;
-
-    font-weight: 800;
-
-    letter-spacing: -.06em;
-
-}
-
-.footer-thai {
-
-    font-family: "Noto Sans Thai", sans-serif;
-
-    font-size: 10px;
-
-    opacity: .5;
-
-    margin-top: 8px;
-
-}
-
-.footer-bottom {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    padding-top: 25px;
-
-    font-size: 8px;
-
-    letter-spacing: .12em;
-
-    opacity: .45;
-
-}
-
-
-/* =========================================================
-   MUSIC PLAYER
-========================================================= */
-
-.music-player {
-
-    position: fixed;
-
-    right: 28px;
-
-    bottom: 28px;
-
-    z-index: 8000;
-
-}
-
-.music-button {
-
-    position: relative;
-
-    width: 62px;
-
-    height: 62px;
-
-    border-radius: 50%;
-
-    border:
-        1px solid rgba(255,255,255,.35);
-
-    background: var(--navy);
-
-    color: white;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transition:
-        transform .3s ease,
-        background .3s ease,
-        color .3s ease;
-
-}
-
-.music-button:hover {
-
-    transform: scale(1.08);
-
-    background: var(--blue);
-
-}
-
-.music-button.playing {
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    border-color: var(--yellow);
-
-}
-
-.music-bars {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 3px;
-
-    height: 20px;
-
-}
-
-.music-bars span {
-
-    width: 2px;
-
-    height: 6px;
-
-    background: currentColor;
-
-}
-
-.music-button.playing
-.music-bars span:nth-child(1) {
-
-    animation: musicBar .7s infinite ease-in-out;
-
-}
-
-.music-button.playing
-.music-bars span:nth-child(2) {
-
-    animation:
-        musicBar .5s infinite ease-in-out .1s;
-
-}
-
-.music-button.playing
-.music-bars span:nth-child(3) {
-
-    animation:
-        musicBar .8s infinite ease-in-out .2s;
-
-}
-
-.music-button.playing
-.music-bars span:nth-child(4) {
-
-    animation:
-        musicBar .55s infinite ease-in-out .05s;
-
-}
-
-@keyframes musicBar {
-
-    0%,100% {
-        height: 5px;
-    }
-
-    50% {
-        height: 20px;
-    }
-
-}
-
-.music-label {
-
-    position: absolute;
-
-    bottom: -17px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-family: "Manrope", sans-serif;
-
-    font-size: 6px;
-
-    font-weight: 700;
-
-    letter-spacing: .13em;
-
-    white-space: nowrap;
-
-    opacity: .6;
-
-}
-
-
-/* =========================================================
-   REVEAL
-========================================================= */
-
-.reveal {
-
-    opacity: 0;
-
-    transform: translateY(30px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-
-}
-
-.reveal.visible {
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .desktop-nav {
-        display: none;
-    }
-
-    .menu-button {
-        display: block;
-    }
-
-    .hero {
-        min-height: 100svh;
-    }
-
-    .hero-yellow {
-        width: 55vw;
-        height: 55vw;
-    }
-
-    .hero-blue-shape {
-        right: 5%;
-        width: 30vw;
-    }
-
-    .hero-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-    }
-
-    .hero-date {
-        text-align: left;
-    }
-
-    .about-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .program-row {
-        grid-template-columns:
-            50px 1fr;
-    }
-
-    .program-date {
-        grid-column: 2;
-        text-align: left;
-        opacity: .55;
-    }
-
-    .art-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .art-card,
-    .art-card:nth-child(2),
-    .art-card:nth-child(3) {
-        margin-top: 0;
-    }
-
-    .works-intro {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cta {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .header {
-        height: 68px;
-    }
-
-    .hero {
-        padding:
-            130px 22px
-            45px;
-    }
-
-    .hero-title {
-        font-size:
-            clamp(64px, 19vw, 120px);
-    }
-
-    .hero-number {
-        font-size: 85vw;
-        right: -8vw;
-        bottom: 2vh;
-    }
-
-    .section {
-        padding:
-            85px 22px;
-    }
-
-    .section-heading {
-        font-size:
-            clamp(45px, 14vw, 80px);
-    }
-
-    .program-row {
-        padding: 24px 0;
-    }
-
-    .program-name {
-        font-size: 16px;
-    }
-
-    .art-card {
-        min-height: 330px;
-    }
-
-    .art-big {
-        font-size: 130px;
-    }
-
-    .news-item {
-        grid-template-columns:
-            45px 1fr;
-    }
-
-    .news-date {
-        grid-column: 2;
-        text-align: left;
-    }
-
-    .music-player {
-        right: 17px;
-        bottom: 17px;
-    }
-
-    .music-button {
-        width: 55px;
-        height: 55px;
-    }
-
-    .footer-top,
-    .footer-bottom {
-        flex-direction: column;
-    }
-
-}
-
-</style>
-
-
-<style id="v4-safe-fix">
-/* V4 safety fix: never leave a blank page behind the loader */
-html, body { min-height: 100%; background: #071a3d; }
-.loader { animation: loaderOut .8s ease 1.2s forwards !important; }
-.loader.is-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+:root{--navy:#0b1a38;--deep:#071229;--blue:#355bea;--yellow:#fbe05a;--paper:#f8f8f5;--ink:#141d37;--muted:#727984;--line:#dfe1e1;--page-gutter:clamp(24px,5.3vw,88px);font-family:'DM Sans','Noto Sans Thai',sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed}
+button,a,summary{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
+.site-header :focus-visible,.hero :focus-visible,.works-section :focus-visible,.site-footer :focus-visible,.contact-section :focus-visible{outline-color:var(--yellow)}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h4{font-family:'Manrope','Noto Sans Thai',sans-serif}
+button svg,a svg,summary svg{flex-shrink:0}
+.skip-link{position:fixed;left:20px;top:-100px;z-index:100;padding:16px;background:var(--yellow);color:var(--navy)}
+.skip-link:focus{top:12px}
+
+/* HEADER */
+.site-header{height:90px;padding:0 var(--page-gutter);display:flex;align-items:center;justify-content:space-between;gap:30px;background:var(--navy);color:#fff;position:sticky;top:0;z-index:40;border-bottom:1px solid #ffffff14}
+.brand{display:flex;gap:12px;align-items:center}
+.brand-mark{height:40px;width:43px;background:var(--yellow);color:var(--navy);font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-2px;font-size:23px;display:flex;align-items:center;justify-content:center;position:relative}
+.brand-mark span{position:absolute;right:3px;top:0;font-size:12px;letter-spacing:0}
+.brand-name{font-size:13px;font-weight:800;letter-spacing:.04em;line-height:1.15}
+.brand-name>span{display:block;font-size:9px;font-weight:400;letter-spacing:.01em;margin-top:5px;color:#b5c0d0;font-family:'Noto Sans Thai',sans-serif}
+.desktop-nav{display:flex;gap:32px;margin-left:auto;margin-right:auto}
+.desktop-nav a{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:#c6ceda;position:relative;padding:12px 0}
+.desktop-nav a::after{content:'';position:absolute;bottom:3px;left:0;right:0;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.desktop-nav a:hover,.desktop-nav a.active{color:#fff}
+.desktop-nav a:hover::after,.desktop-nav a.active::after{transform:scaleX(1)}
+.header-contact{font-size:9px;letter-spacing:.1em;display:flex;gap:22px;align-items:center;padding:12px 0;border-bottom:1px solid #ffffff55}
+.header-contact svg{color:var(--yellow)}
+.menu-toggle{display:none;background:none;border:1px solid #ffffff40;padding:9px;position:relative;z-index:2;color:#fff}
+.mobile-navigation{display:none}
+
+/* HERO */
+.hero{background:var(--navy);color:#fff;padding:30px var(--page-gutter) 0;position:relative;isolation:isolate;overflow:hidden}
+.hero-grid{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:86px 86px}
+.hero-eyebrow{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.15em;color:#a4b0c3;position:relative;z-index:2}
+.hero-eyebrow>span:first-child{display:flex;align-items:center;gap:11px;color:#d5dce7}
+.hero-eyebrow i{width:6px;height:6px;background:var(--yellow);border-radius:50%}
+.hero-content{position:relative;z-index:2;padding:48px 0;width:78%;pointer-events:none}
+.hero-content a{pointer-events:auto}
+.hero h1{font-size:clamp(78px,11.4vw,175px);font-weight:800;line-height:.9;letter-spacing:-.075em}
+.outlined-number{display:flex;align-items:center;gap:37px;margin-top:6px;font-size:clamp(130px,16.1vw,245px);color:transparent;-webkit-text-stroke:1.3px #edf1fa;line-height:.94;letter-spacing:-.09em}
+.hero-thai{font-family:'Noto Sans Thai',sans-serif;font-size:clamp(20px,2.3vw,34px);font-weight:500;line-height:1.5;letter-spacing:-.02em;color:var(--yellow);-webkit-text-stroke:0}
+.hero-subtitle{font-size:clamp(16px,1.5vw,22px);letter-spacing:-.02em;margin-top:28px}
+.hero-description{font-family:'Noto Sans Thai',sans-serif;color:#b0bbcc;line-height:1.9;font-size:13px;margin-top:14px;max-width:460px}
+.hero-actions{display:flex;align-items:center;gap:28px;margin-top:28px}
+.button{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;font-size:9px;font-weight:700;letter-spacing:.08em;padding:18px 20px;transition:background .2s,transform .2s;border:0}
+.button-yellow{color:var(--navy);background:var(--yellow)}
+.button-yellow:hover{background:#fff1a3;transform:translateY(-3px)}
+.text-link{display:flex;align-items:center;gap:14px;font-size:9px;letter-spacing:.09em}
+.text-link:hover{color:var(--yellow)}
+.hero-art{position:absolute;right:0;top:36px;width:53%;height:calc(100% - 88px);z-index:0;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 16%);mask-image:linear-gradient(to right,transparent,#000 16%)}
+.hero-art .shape{position:absolute}
+.hero-art .s1{width:62%;height:120%;right:6%;top:-8%;background:var(--blue);transform:rotate(18deg)}
+.hero-art .s2{width:48%;aspect-ratio:1;right:-6%;top:22%;border-radius:50%;background:var(--yellow)}
+.hero-art .s3{width:40%;aspect-ratio:1;left:22%;bottom:6%;border:1px solid #ffffff80;border-radius:50%}
+.hero-art .s4{font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(200px,28vw,420px);line-height:.8;letter-spacing:-.09em;color:transparent;-webkit-text-stroke:2px var(--navy);right:12%;bottom:-2%}
+.art-coordinate{position:absolute;right:var(--page-gutter);bottom:40px;font-size:8px;letter-spacing:.15em;color:#b6c2d5;writing-mode:vertical-rl}
+.hero-star{position:absolute;right:45%;top:19px;font-size:49px;color:var(--yellow);line-height:1;transform:rotate(12deg)}
+.hero-bottom{position:relative;z-index:3;border-top:1px solid #ffffff25;display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:24px;padding:23px 0;color:#c3cddc;font-size:8px;letter-spacing:.1em}
+.hero-bottom>div{display:flex;align-items:center;gap:9px}
+.status-dot{height:5px;width:5px;display:inline-block;border-radius:50%;background:var(--yellow)}
+.hero-bottom>a{display:flex;align-items:center;gap:16px}
+.hero-bottom strong{font-weight:600;font-size:10px;letter-spacing:.04em;color:#fff}
+.muted{color:#96a5bc;font-size:8px}
+.hero-bottom .scroll-prompt{justify-content:flex-end}
+.hero-bottom a:hover{color:var(--yellow)}
+
+/* MARQUEE */
+.marquee{background:var(--yellow);overflow:hidden;padding:16px 0;color:var(--navy)}
+.marquee-track{display:flex;width:max-content;animation:marquee 36s linear infinite}
+.marquee-group{display:flex;align-items:center;gap:35px;padding-right:35px;font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.11em}
+.ticker-star{font-size:22px;line-height:1;font-weight:400}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{padding:85px var(--page-gutter) 90px}
+.section-label{display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:600;letter-spacing:.13em;margin-bottom:49px}
+.section-label>span:first-child{display:flex;align-items:center;gap:10px}
+.section-label>span:first-child::before{content:'';display:inline-block;width:19px;height:2px;background:var(--blue)}
+.section-label>span:nth-child(2){font-size:8px;color:var(--muted);font-weight:400}
+.section h2{font-size:clamp(48px,6.8vw,105px);font-weight:800;line-height:.96;letter-spacing:-.065em}
+.blue-text{color:var(--blue)}
+
+/* ABOUT */
+.about-section{background-image:linear-gradient(#14203904 1px,transparent 1px),linear-gradient(90deg,#14203904 1px,transparent 1px);background-size:85px 85px}
+.about-layout{display:grid;grid-template-columns:1fr .8fr;gap:9vw}
+.about-layout>h2{position:relative;font-size:clamp(58px,8.7vw,135px)}
+.heading-spark{position:absolute;left:82%;top:70px;font-size:53px;color:var(--blue);font-weight:400}
+.small-eyebrow{font-size:8px;letter-spacing:.12em;font-weight:600;display:block}
+.about-copy{padding-top:8px}
+.about-copy>.small-eyebrow{color:var(--blue)}
+.about-copy h3{font-family:'Noto Sans Thai',sans-serif;font-size:clamp(22px,2.25vw,34px);font-weight:600;line-height:1.5;margin:18px 0}
+.about-copy p{font-family:'Noto Sans Thai',sans-serif;font-size:13px;line-height:2;color:#4b5460}
+.about-copy .secondary-copy{color:#7c828b;font-size:12px;margin-top:14px}
+.underlined-link{display:inline-flex;gap:25px;align-items:center;padding-bottom:9px;border-bottom:1px solid #14203980;font-size:9px;font-weight:600;letter-spacing:.06em;transition:color .2s}
+.underlined-link:hover{color:var(--blue)}
+.about-copy .underlined-link{margin-top:26px}
+.values-strip{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;margin-top:62px;border-top:1px solid var(--line);padding-top:28px}
+.values-strip>div{position:relative;padding-left:28px;border-left:1px solid var(--line)}
+.values-strip>div:first-child{border-left:none;padding-left:0}
+.values-strip>div>span{font-size:8px;color:var(--muted);position:absolute;top:3px;right:30px}
+.values-strip h4{font-size:26px;letter-spacing:-.045em;font-weight:800}
+.values-strip p{font-family:'Noto Sans Thai',sans-serif;font-size:11px;color:var(--muted);margin-top:6px}
+.values-strip .values-note{display:flex;align-items:center;justify-content:space-between;font-size:12px;line-height:1.7;letter-spacing:-.01em}
+.values-note svg{color:var(--blue)}
+
+/* PROGRAM */
+.program-section{background:#fff;border-top:1px solid var(--line)}
+.section-heading-row{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;margin-bottom:40px}
+.section-intro{font-family:'Noto Sans Thai',sans-serif;font-size:12px;line-height:2;color:var(--muted);max-width:335px;padding-bottom:6px}
+.program-list{border-top:1px solid var(--line);margin-top:45px}
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+.program-item{border-bottom:1px solid var(--line);transition:background .2s}
+.program-item:hover{background:#f9f9f4}
+.program-item summary{display:grid;grid-template-columns:65px 1fr 200px 35px;align-items:center;gap:15px;padding:27px 18px 27px 0}
+.row-index{font-size:10px;font-weight:600;letter-spacing:.1em}
+.program-title h3{font-family:'Noto Sans Thai',sans-serif;font-size:20px;font-weight:500}
+.program-title>span{font-size:11px;color:var(--muted);display:block;margin-top:5px}
+.program-date{font-size:9px;letter-spacing:.05em;text-align:right}
+.expand-icon{display:grid;place-items:center;margin-left:auto}
+.expand-icon>svg:nth-child(2){display:none}
+details[open]>summary .expand-icon>svg:first-child{display:none}
+details[open]>summary .expand-icon>svg:nth-child(2){display:block}
+.program-item[open]{background:#f4f5ee}
+.program-item[open] summary{padding-left:18px}
+.program-item[open] .row-index{color:var(--blue)}
+.program-description{padding:0 280px 26px 98px}
+.program-description p{font-family:'Noto Sans Thai',sans-serif;font-size:12px;line-height:2;color:#67707b;max-width:640px}
+.program-description a{display:inline-flex;align-items:center;gap:10px;color:var(--blue);font-size:11px;margin-top:14px;font-family:'Noto Sans Thai',sans-serif}
+.program-note{display:flex;justify-content:space-between;gap:20px;margin-top:25px}
+.program-note span{font-size:8px;letter-spacing:.08em}
+.program-note p{font-family:'Noto Sans Thai',sans-serif;font-size:10px;color:var(--muted)}
+
+/* WORKS */
+.works-section{background:var(--navy);color:var(--paper)}
+.works-section .section-label>span:first-child::before{background:var(--yellow)}
+.works-section .section-label>span:nth-child(2),.works-section .section-intro{color:#98a8bf}
+.outline-text{color:transparent;-webkit-text-stroke:1px #e7ebf3}
+.work-filters{display:flex;gap:8px;flex-wrap:wrap;margin:40px 0 28px}
+.work-filters button{padding:10px 16px;color:#b1bbca;background:transparent;border:1px solid #ffffff28;font-size:9px;display:flex;gap:15px;align-items:center;transition:background .2s,color .2s}
+.work-filters button:hover{border-color:var(--yellow);color:var(--yellow)}
+.work-filters button.selected{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+.work-filters button>span{font-size:7px;opacity:.65}
+.work-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:22px;align-items:start}
+.work-card{text-align:left;border:0;background:transparent;padding:0;min-width:0;color:inherit}
+.work-card[hidden]{display:none}
+.work-card:nth-child(2){padding-top:44px}
+.work-poster{height:365px;position:relative;overflow:hidden;transition:transform .3s}
+.work-card:hover .work-poster{transform:translateY(-7px)}
+.poster-art{background:var(--blue);color:var(--yellow)}
+.poster-tag{font-size:7px;letter-spacing:.14em;position:absolute;top:21px;left:22px;z-index:2}
+.poster-shapes{position:absolute;inset:0}
+.poster-art .poster-shapes>span:first-child{width:92%;height:85%;background:var(--yellow);position:absolute;top:13%;left:35%;transform:rotate(31deg)}
+.poster-art .poster-shapes>span:nth-child(2){width:190px;height:190px;border:1px solid #fff8;border-radius:50%;position:absolute;left:-90px;top:100px}
+.poster-letter{position:absolute;font-family:'Manrope',sans-serif;font-size:300px;line-height:.85;font-weight:800;letter-spacing:-.09em;left:8%;top:24%;color:var(--navy);z-index:1}
+.poster-art .poster-letter{color:transparent;-webkit-text-stroke:2px var(--navy);transform:rotate(-8deg)}
+.poster-caption{position:absolute;left:22px;bottom:24px;z-index:2;font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;line-height:1.05;letter-spacing:-.05em;color:var(--navy)}
+.poster-caption>span{display:block;font-size:9px;font-weight:600;letter-spacing:.1em;margin-top:8px}
+.poster-arrow{position:absolute;right:20px;bottom:25px;z-index:2;color:var(--navy)}
+.poster-creativity{background:var(--yellow);color:var(--navy)}
+.poster-creativity .poster-shapes>span:first-child{position:absolute;width:245px;height:245px;left:32%;top:14%;background:var(--blue);border-radius:50%}
+.poster-creativity .poster-shapes>span:nth-child(2){position:absolute;width:260px;height:100px;left:-45px;top:45%;background:var(--paper);transform:rotate(-25deg)}
+.poster-creativity .poster-letter{color:var(--navy);font-size:260px;left:15%;top:23%}
+.poster-people{background:#e9ebe5;color:var(--navy)}
+.poster-people .poster-shapes>span:first-child{position:absolute;width:70%;height:100%;left:44%;top:0;background:var(--blue);transform:skew(-18deg)}
+.poster-people .poster-shapes>span:nth-child(2){position:absolute;width:220px;height:220px;background:var(--yellow);border-radius:50%;left:-70px;top:24%}
+.poster-people .poster-letter{color:var(--navy);left:24%;font-size:280px}
+.work-card-caption{padding-top:20px}
+.work-card-caption>span{font-size:7px;letter-spacing:.13em;color:#9baac1}
+.work-card-caption h3{font-family:'Manrope',sans-serif;font-size:21px;font-weight:600;letter-spacing:-.04em;margin-top:8px}
+.work-card-caption p{font-family:'Noto Sans Thai',sans-serif;font-size:11px;color:#95a5bd;margin-top:6px}
+.works-footnote{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff25;padding-top:22px;margin-top:45px;font-size:7px;letter-spacing:.13em;color:#9baac1}
+
+/* STATEMENT */
+.statement-section{background:var(--yellow);padding:68px var(--page-gutter);display:flex;align-items:center;gap:40px;position:relative;overflow:hidden;color:var(--navy)}
+.statement-section p{font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(30px,4.8vw,74px);line-height:1.06;letter-spacing:-.06em;margin-top:19px}
+.statement-section p span{color:transparent;-webkit-text-stroke:1px var(--navy)}
+.statement-spark{font-size:112px;line-height:1;flex-shrink:0}
+.statement-thai{font-family:'Noto Sans Thai',sans-serif;font-size:11px;display:block;margin-top:20px}
+.statement-arrow{margin-left:auto;align-self:flex-end}
+
+/* NEWS */
+.news-section{padding-bottom:75px}
+.news-section .section-heading-row h2{font-size:clamp(44px,6.5vw,99px)}
+.news-list{border-top:1px solid var(--line)}
+.news-item{border-bottom:1px solid var(--line)}
+.news-item summary{display:grid;grid-template-columns:65px 1fr 90px 30px;align-items:center;gap:20px;padding:26px 0}
+.news-copy .small-eyebrow{color:var(--blue);font-size:7px;margin-bottom:9px}
+.news-copy h3{font-family:'Noto Sans Thai',sans-serif;font-size:17px;font-weight:500}
+.news-date{font-size:9px;color:var(--muted);text-align:right;letter-spacing:.08em}
+.news-description{font-family:'Noto Sans Thai',sans-serif;font-size:13px;line-height:2;color:var(--muted);padding:0 170px 25px 85px}
+.news-item:hover .news-copy h3,.news-item[open] .news-copy h3.is-first{color:var(--blue)}
+
+/* FAQ */
+.faq-section{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.1fr;gap:9vw;padding-top:65px;margin-top:75px}
+.faq-section .section-label{margin-bottom:27px}
+.faq-section h2{font-size:clamp(38px,4.3vw,65px)}
+.faq-section>div>p{font-family:'Noto Sans Thai',sans-serif;font-size:12px;color:var(--muted);margin-top:20px}
+.faq-section .underlined-link{margin-top:20px}
+.faq-list{padding-top:5px}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list details:first-child{border-top:1px solid var(--line)}
+.faq-list summary{padding:23px 0;display:flex;align-items:center;justify-content:space-between;gap:15px;font-family:'Noto Sans Thai',sans-serif;font-size:14px;font-weight:500}
+.faq-list p{font-family:'Noto Sans Thai',sans-serif;font-size:12px;line-height:2;color:var(--muted);padding:0 25px 22px 0}
+
+/* CONTACT */
+.contact-section{background:var(--blue);color:#fff;padding:65px var(--page-gutter) 38px}
+.contact-main{display:flex;align-items:center;justify-content:space-between;gap:40px}
+.contact-main .small-eyebrow{color:#c5d3ff}
+.contact-main h2{font-size:clamp(48px,7.7vw,118px);font-weight:800;letter-spacing:-.075em;line-height:.98;margin-top:25px}
+.contact-main h2>span{color:var(--yellow)}
+.contact-main p{font-family:'Noto Sans Thai',sans-serif;font-size:12px;color:#d0ddff;margin-top:25px}
+.contact-orbit{width:150px;height:150px;border:1px solid #ffffff70;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;flex-shrink:0;transition:background .25s,color .25s,transform .25s}
+.contact-orbit>span{font-size:8px;letter-spacing:.1em}
+.contact-orbit:hover{background:var(--yellow);color:var(--navy);border-color:var(--yellow);transform:rotate(-8deg)}
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:53px;border-top:1px solid #ffffff40;padding-top:24px}
+.social-grid>a{padding:0 22px;border-right:1px solid #ffffff40;transition:color .2s}
+.social-grid>a:first-child{padding-left:0}
+.social-grid>a:last-child{border-right:0;padding-right:0}
+.social-grid>a>span{font-size:9px;color:#c5d3ff}
+.social-grid>a>div{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;margin-top:10px}
+.social-grid>a:hover{color:var(--yellow)}
+
+/* FOOTER */
+.site-footer{background:var(--deep);color:#fff;padding:43px var(--page-gutter) 23px}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:35px;border-bottom:1px solid #ffffff20;padding-bottom:35px}
+.footer-brand{font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.05em}
+.footer-brand>span{font-family:'Noto Sans Thai',sans-serif;font-size:10px;display:block;letter-spacing:0;font-weight:400;color:#8c9bb4;margin-top:6px}
+.footer-email>span{font-size:7px;letter-spacing:.12em;color:#8c9bb4;display:block;margin-bottom:10px}
+.footer-email>a{font-size:12px;display:flex;gap:20px;align-items:center}
+.back-to-top{display:flex;gap:20px;align-items:center;font-size:8px;letter-spacing:.07em}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:21px;font-size:7px;letter-spacing:.08em;color:#8c9bb4}
+.footer-bottom>a{display:flex;align-items:center;gap:13px}
+.site-footer a:hover{color:var(--yellow)}
+.ambient-control{background:transparent;border:0;padding:5px 0;display:flex;align-items:center;gap:9px;font-size:7px;letter-spacing:.08em;color:#a7b4c9}
+.ambient-control[aria-pressed=true]{color:var(--yellow)}
+.ambient-control:disabled{color:#6a7589}
+
+/* DIALOG */
+.work-dialog{width:min(620px,calc(100% - 40px));max-height:85svh;border:0;padding:55px 45px;background:var(--paper);color:var(--ink);overflow:auto;margin:auto}
+.work-dialog::backdrop{background:#031027cf;backdrop-filter:blur(7px)}
+.dialog-close{position:absolute;right:16px;top:16px;background:transparent;border:0;padding:6px}
+.work-dialog .small-eyebrow{color:var(--blue)}
+.work-dialog h2{font-size:49px;font-weight:800;letter-spacing:-.06em;line-height:1.05;margin-top:23px}
+.work-dialog h3{font-family:'Noto Sans Thai',sans-serif;font-size:19px;font-weight:500;margin-top:25px}
+.work-dialog p{font-family:'Noto Sans Thai',sans-serif;font-size:14px;line-height:2;color:var(--muted);margin:18px 0 28px}
+.dialog-note{display:block;font-size:7px;letter-spacing:.1em;color:var(--muted);margin-top:25px}
+
+@media(min-width:1600px){.hero{min-height:760px}.hero-content{padding-top:65px;padding-bottom:65px}.hero-art{right:2%;width:49%}}
+@media(max-width:1100px){.desktop-nav{gap:20px}.header-contact{gap:10px;font-size:8px}.hero-content{width:84%}.hero-art{width:55%;right:-5%}.hero-bottom{grid-template-columns:1fr auto}.hero-bottom .scroll-prompt{display:none}.about-layout{gap:6vw}.heading-spark{left:80%;font-size:38px}.work-poster{height:305px}.poster-letter{font-size:240px}.poster-creativity .poster-letter{font-size:220px}.poster-people .poster-letter{font-size:235px}.poster-caption{font-size:21px}.program-description{padding-right:140px}.statement-spark{font-size:85px}.statement-section{gap:25px}.statement-arrow{width:40px}.values-strip .values-note{font-size:10px}.section h2{font-size:7.3vw}}
+@media(max-width:800px){html{scroll-padding-top:72px}.site-header{height:72px}.desktop-nav,.header-contact{display:none}.menu-toggle{display:flex}.mobile-navigation{display:block;position:fixed;inset:72px 0 0;background:var(--navy);color:#fff;z-index:35;padding:45px var(--page-gutter);visibility:hidden;opacity:0;transform:translateY(-15px);transition:opacity .25s,transform .25s,visibility .25s}.mobile-navigation.is-open{visibility:visible;opacity:1;transform:none}.mobile-navigation nav{display:flex;flex-direction:column}.mobile-navigation a{display:flex;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid #ffffff25;font-size:29px;font-family:'Manrope',sans-serif}.mobile-navigation a>span{color:var(--yellow);font-size:10px}.mobile-navigation a>svg{margin-left:auto}.mobile-navigation>p{font-size:9px;letter-spacing:.13em;margin-top:38px;color:#a9b6cc}.hero-eyebrow>span:nth-child(2){display:none}.hero-content{padding-top:48px;width:100%;padding-bottom:42px}.hero h1{font-size:12.5vw}.outlined-number{font-size:23vw;gap:25px}.hero-thai{font-size:24px}.hero-art{top:54px;height:400px;width:65%;right:-11%;opacity:.72}.hero-subtitle{font-size:20px;margin-top:24px}.hero-description{font-size:12px;max-width:340px}.hero-bottom{font-size:7px;gap:12px}.hero-bottom>a{gap:10px}.hero-bottom strong{font-size:8px}.section{padding-top:65px;padding-bottom:65px}.section-label{margin-bottom:35px}.section-label>span:nth-child(2){display:none}.about-layout{grid-template-columns:1fr .9fr;gap:35px}.about-layout>h2{font-size:9.1vw}.heading-spark{left:76%;top:115px;font-size:40px}.about-copy h3{font-size:23px}.values-strip{margin-top:40px;grid-template-columns:repeat(3,1fr)}.values-strip .values-note{display:none}.values-strip h4{font-size:23px}.values-strip>div{padding-left:20px}.values-strip>div>span{right:16px}.section h2{font-size:8.5vw}.section-heading-row{gap:25px}.section-intro{font-size:11px;max-width:260px}.program-item summary{grid-template-columns:40px 1fr 145px 20px;gap:10px;padding:23px 10px 23px 0}.program-title h3{font-size:17px}.program-date{font-size:8px}.program-description{padding:0 80px 23px 68px}.program-note{flex-direction:column;gap:10px}.work-grid{gap:15px}.work-poster{height:260px}.poster-letter{font-size:200px;left:1%}.poster-creativity .poster-letter{font-size:190px;left:3%}.poster-people .poster-letter{font-size:200px;left:14%}.poster-creativity .poster-shapes>span:first-child{width:180px;height:180px}.poster-caption{left:15px;font-size:18px}.poster-arrow{right:12px;bottom:20px}.poster-arrow svg{width:18px}.work-card-caption h3{font-size:16px}.statement-section{padding-top:45px;padding-bottom:45px;gap:22px}.statement-spark{font-size:65px}.statement-section p{font-size:4.8vw}.statement-arrow{display:none}.news-item summary{grid-template-columns:35px 1fr 75px 20px;gap:15px}.news-copy h3{font-size:15px}.news-description{padding-left:50px;padding-right:90px;font-size:12px}.faq-section{grid-template-columns:1fr 1.1fr;gap:35px}.faq-section h2{font-size:5.4vw}.faq-list summary{font-size:12px}.contact-main h2{font-size:8.2vw}.contact-orbit{width:120px;height:120px}.social-grid>a{padding-left:14px;padding-right:14px}.social-grid>a>div{font-size:10px}.footer-email>a{font-size:10px;gap:10px}.footer-top{gap:22px}}
+@media(max-width:580px){:root{--page-gutter:22px}.hero{padding-top:23px}.hero-content{padding-top:37px;padding-bottom:33px}.hero h1{font-size:12.8vw}.outlined-number{font-size:34vw;margin-top:16px;gap:24px}.hero-thai{font-size:22px;position:relative;z-index:3}.hero-art{width:85%;right:-27%;height:350px;top:70px;opacity:.65}.art-coordinate{display:none}.hero-subtitle{font-size:18px;position:relative;max-width:260px}.hero-description{max-width:290px;font-size:11px}.hero-actions{gap:18px;flex-wrap:wrap;margin-top:24px}.button{font-size:8px;gap:17px;padding:16px}.text-link{font-size:7px;gap:9px}.hero-bottom{grid-template-columns:1fr;padding:18px 0;gap:14px}.hero-bottom>a{justify-content:space-between}.hero-bottom strong{margin-left:auto;font-size:9px}.marquee{padding:12px 0}.marquee-group{font-size:10px;gap:23px;padding-right:23px}.section{padding-top:49px;padding-bottom:49px}.section-label{font-size:8px;margin-bottom:30px}.about-layout{grid-template-columns:1fr;gap:30px}.about-layout>h2{font-size:20vw;line-height:.92}.heading-spark{left:74%;top:45px;font-size:44px}.about-copy{padding-top:0}.about-copy h3{font-size:25px}.values-strip{margin-top:32px;padding-top:22px}.values-strip>div{padding-left:13px}.values-strip>div>span{position:static;display:block;margin-bottom:9px}.values-strip h4{font-size:21px}.values-strip p{font-size:9px}.section h2{font-size:13.7vw}.section-heading-row{flex-direction:column;align-items:flex-start;gap:25px;margin-bottom:28px}.section-intro{max-width:100%}.program-list{margin-top:30px}.program-item summary{grid-template-columns:30px 1fr 20px;gap:10px;position:relative;padding:23px 10px 23px 0}.program-title h3{font-size:16px}.program-title>span{font-size:10px}.program-date{grid-column:2;text-align:left;font-size:7px}.program-item .expand-icon{grid-column:3;grid-row:1 / 3}.program-item[open] summary{padding-left:10px}.program-description{padding:0 22px 23px 50px}.program-description p{font-size:11px}.program-note p{font-size:9px;line-height:1.8}.work-filters{gap:7px;margin-top:28px}.work-filters button{padding:9px 11px;font-size:8px}.work-grid{grid-template-columns:1fr;gap:28px}.work-card:nth-child(2){padding-top:0}.work-poster{height:auto;aspect-ratio:1.06}.poster-tag{font-size:8px;left:22px;top:22px}.poster-letter{font-size:80vw;left:14%;top:20%}.poster-creativity .poster-letter{font-size:70vw;left:17%}.poster-people .poster-letter{font-size:75vw;left:27%}.poster-creativity .poster-shapes>span:first-child{width:65vw;height:65vw}.poster-caption{font-size:29px;left:22px}.poster-caption>span{font-size:8px}.poster-arrow{right:23px;bottom:25px}.poster-arrow svg{width:25px}.work-card-caption{padding-top:17px}.work-card-caption h3{font-size:22px}.work-card-caption p{font-size:11px}.work-card-caption>span{font-size:7px}.works-footnote{flex-direction:column;gap:12px;font-size:6px;margin-top:32px}.statement-section{gap:0;padding-top:40px;padding-bottom:40px}.statement-spark{position:absolute;font-size:100px;right:-35px;top:-40px;opacity:.15}.statement-section p{font-size:7.2vw;line-height:1.16}.statement-thai{font-size:9px;max-width:250px;line-height:1.9}.news-section .section-heading-row h2{font-size:12vw}.news-item summary{grid-template-columns:22px 1fr 20px;gap:13px;padding:23px 0}.news-copy h3{font-size:14px;line-height:1.6}.news-date{grid-column:2;text-align:left;font-size:8px}.news-item .expand-icon{grid-column:3;grid-row:1 / 3}.news-description{padding:0 25px 22px 35px;font-size:11px}.faq-section{grid-template-columns:1fr;gap:32px;margin-top:49px}.faq-section h2{font-size:12vw}.faq-list summary{font-size:13px;padding:20px 0}.faq-list p{font-size:11px}.contact-section{padding-top:45px;padding-bottom:30px}.contact-main{align-items:flex-start;gap:25px;flex-direction:column}.contact-main h2{font-size:12.1vw;margin-top:22px}.contact-main p{font-size:11px;line-height:1.9;max-width:285px}.contact-orbit{width:100%;height:auto;border-radius:0;flex-direction:row-reverse;justify-content:space-between;padding:16px 18px;background:var(--yellow);color:var(--navy);border:0;gap:10px}.contact-orbit svg{width:23px;height:23px}.contact-orbit>span{font-size:9px}.contact-orbit:hover{transform:translateY(-3px)}.social-grid{grid-template-columns:1fr 1fr;row-gap:25px;margin-top:32px;padding-top:23px}.social-grid>a:nth-child(odd){padding-left:0}.social-grid>a:nth-child(even){border:0;padding-right:0}.social-grid>a>div{font-size:11px}.site-footer{padding-top:30px}.footer-top{flex-wrap:wrap;align-items:flex-start;gap:25px;padding-bottom:27px}.footer-brand{width:100%;font-size:26px}.back-to-top{font-size:7px;gap:10px;margin-left:auto;padding-top:16px}.footer-bottom{display:grid;grid-template-columns:1fr 1fr;gap:19px;font-size:6px}.footer-bottom>span:nth-child(2){text-align:right}.ambient-control{justify-self:end;font-size:6px}.work-dialog{padding:47px 27px 35px}.work-dialog h2{font-size:40px}.work-dialog h3{font-size:17px}.work-dialog p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.work-card:hover .work-poster,.button-yellow:hover,.contact-orbit:hover{transform:none}}
 </style>
 </head>
-
-
 <body>
 
+<!-- Reusable icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16M6 14l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 8c2 2 2 6 0 8M19 5c4 4 4 10 0 14" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+</svg>
 
-<!-- =====================================================
-     LOADER
-===================================================== -->
+<a class="skip-link" href="#home">ข้ามไปยังเนื้อหา</a>
 
-<div class="loader">
-
-    <div class="loader-number">
-        101
-    </div>
-
-    <div class="loader-line">
-        <span></span>
-    </div>
-
-    <div class="loader-title">
-        ดาวเด่นบัวหลวง
-    </div>
-
-</div>
-
-
-</section>
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header" id="header">
-
-    <a href="#home" class="logo">
-
-        <div class="logo-mark">
-            101
-        </div>
-
-        <div class="logo-text">
-
-            <strong>BUALUANG</strong>
-
-            <span>
-                ดาวเด่นบัวหลวง
-            </span>
-
-        </div>
-
-    </a>
-
-
-    <nav class="desktop-nav">
-
-        <a href="#about">
-            ABOUT
-        </a>
-
-        <a href="#program">
-            PROGRAM
-        </a>
-
-        <a href="#works">
-            WORKS
-        </a>
-
-        <a href="#news">
-            NEWS
-        </a>
-
-        <a href="#contact">
-            CONTACT
-        </a>
-
-    </nav>
-
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Open menu"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
+<!-- HEADER -->
+<header class="site-header">
+  <a class="brand" href="#home" aria-label="BUALUANG 101 home">
+    <div class="brand-mark">101<span><svg width="12" height="12"><use href="#i-arrow"/></svg></span></div>
+    <div class="brand-name">BUALUANG<span>ดาวเด่นบัวหลวง</span></div>
+  </a>
+  <nav class="desktop-nav" aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#program">Program</a>
+    <a href="#works">Works</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="header-contact" href="#contact">LET'S CONNECT <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <svg width="22" height="22"><use href="#i-menu"/></svg>
+  </button>
 </header>
 
-
-<!-- =====================================================
-     MOBILE MENU
-===================================================== -->
-
-<div
-    class="mobile-menu"
-    id="mobileMenu"
->
-
-    <nav>
-
-        <a href="#about">
-            ABOUT
-        </a>
-
-        <a href="#program">
-            PROGRAM
-        </a>
-
-        <a href="#works">
-            WORKS
-        </a>
-
-        <a href="#news">
-            NEWS
-        </a>
-
-        <a href="#contact">
-            CONTACT
-        </a>
-
-    </nav>
-
+<div class="mobile-navigation" id="mobileNav">
+  <nav aria-label="Mobile">
+    <a href="#about"><span>01</span>About<svg width="22" height="22"><use href="#i-arrow"/></svg></a>
+    <a href="#program"><span>02</span>Program<svg width="22" height="22"><use href="#i-arrow"/></svg></a>
+    <a href="#works"><span>03</span>Works<svg width="22" height="22"><use href="#i-arrow"/></svg></a>
+    <a href="#news"><span>04</span>News<svg width="22" height="22"><use href="#i-arrow"/></svg></a>
+    <a href="#contact"><span>05</span>Contact<svg width="22" height="22"><use href="#i-arrow"/></svg></a>
+  </nav>
+  <p>ART / PEOPLE / CULTURE</p>
 </div>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <main id="home">
 
+<!-- HERO -->
 <section class="hero">
-
-    <div class="hero-grid"></div>
-
-    <div class="hero-blue-shape"></div>
-
-    <div class="hero-yellow"></div>
-
-
-    <div class="hero-content">
-
-        <div class="hero-kicker">
-            CONTEMPORARY ART / THAILAND
-        </div>
-
-
-        <h1 class="hero-title">
-
-            BUALUANG
-
-            <br>
-
-            <span class="outline">
-                101
-            </span>
-
-        </h1>
-
-
-        <div
-            class="hero-number"
-            aria-hidden="true"
-        >
-            101
-        </div>
-
-
-        <div class="hero-bottom">
-
-            <p class="hero-description">
-
-                พื้นที่สำหรับการเรียนรู้
-                การสร้างสรรค์
-                และการเติบโตของคนรุ่นใหม่
-
-            </p>
-
-
-            <div class="hero-date">
-
-                <span>
-                    ORIENTATION
-                </span>
-
-                <strong>
-                    17—19 OCTOBER
-                </strong>
-
-            </div>
-
-        </div>
-
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">
+    <span><i></i>CONTEMPORARY ART / THAILAND</span>
+    <span>EST. 2026</span>
+    <span>ORIENTATION 17—19 OCT</span>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span><span class="shape s4">A</span>
+  </div>
+  <span class="hero-star" aria-hidden="true">✦</span>
+  <div class="art-coordinate">13.7563° N / 100.5018° E</div>
+  <div class="hero-content">
+    <h1>BUALUANG
+      <div class="outlined-number">101 <span class="hero-thai">ดาวเด่นบัวหลวง</span></div>
+    </h1>
+    <p class="hero-subtitle">Learn. Create. Grow.</p>
+    <p class="hero-description">พื้นที่สำหรับการเรียนรู้ การสร้างสรรค์ และการเติบโตของคนรุ่นใหม่ ผ่านศิลปะ กิจกรรม และประสบการณ์ร่วมกัน</p>
+    <div class="hero-actions">
+      <a class="button button-yellow" href="#program">EXPLORE THE PROGRAM <svg width="16" height="16"><use href="#i-right"/></svg></a>
+      <a class="text-link" href="#about">ABOUT 101 <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
     </div>
-
+  </div>
+  <div class="hero-bottom">
+    <div><span class="status-dot"></span>ORIENTATION · 17—19 OCTOBER 2026</div>
+    <div><span class="muted">FOLLOW OFFICIAL CHANNELS FOR DETAILS</span></div>
+    <a class="scroll-prompt" href="#about"><span class="muted">SCROLL</span><svg width="14" height="14"><use href="#i-down"/></svg></a>
+  </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-group"><span>ART</span><span class="ticker-star">✦</span><span>CREATIVITY</span><span class="ticker-star">✦</span><span>PEOPLE</span><span class="ticker-star">✦</span><span>CULTURE</span><span class="ticker-star">✦</span><span>BUALUANG 101</span><span class="ticker-star">✦</span><span>ART</span><span class="ticker-star">✦</span><span>CREATIVITY</span><span class="ticker-star">✦</span><span>PEOPLE</span><span class="ticker-star">✦</span><span>CULTURE</span><span class="ticker-star">✦</span><span>BUALUANG 101</span><span class="ticker-star">✦</span></div>
+    <div class="marquee-group"><span>ART</span><span class="ticker-star">✦</span><span>CREATIVITY</span><span class="ticker-star">✦</span><span>PEOPLE</span><span class="ticker-star">✦</span><span>CULTURE</span><span class="ticker-star">✦</span><span>BUALUANG 101</span><span class="ticker-star">✦</span><span>ART</span><span class="ticker-star">✦</span><span>CREATIVITY</span><span class="ticker-star">✦</span><span>PEOPLE</span><span class="ticker-star">✦</span><span>CULTURE</span><span class="ticker-star">✦</span><span>BUALUANG 101</span><span class="ticker-star">✦</span></div>
+  </div>
+</div>
 
-<!-- =====================================================
-     MARQUEE
-===================================================== -->
-
-<section class="marquee">
-
-    <div class="marquee-track">
-
-        <span>ART</span>
-        <b></b>
-
-        <span>CREATIVITY</span>
-        <b></b>
-
-        <span>PEOPLE</span>
-        <b></b>
-
-        <span>CULTURE</span>
-        <b></b>
-
-        <span>BUALUANG 101</span>
-        <b></b>
-
-        <span>ART</span>
-        <b></b>
-
-        <span>CREATIVITY</span>
-        <b></b>
-
-        <span>PEOPLE</span>
-        <b></b>
-
-        <span>CULTURE</span>
-        <b></b>
-
-        <span>BUALUANG 101</span>
-        <b></b>
-
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-label"><span>01 / ABOUT</span><span>A SPACE TO LEARN, MAKE AND GROW.</span></div>
+  <div class="about-layout">
+    <h2>MORE<br>THAN <span class="blue-text">101.</span><span class="heading-spark" aria-hidden="true">✦</span></h2>
+    <div class="about-copy">
+      <span class="small-eyebrow">ABOUT THE PROJECT</span>
+      <h3>พื้นที่แห่งการเรียนรู้ การสร้างสรรค์ และการเติบโตสำหรับคนรุ่นใหม่</h3>
+      <p>ดาวเด่นบัวหลวง 101 คือพื้นที่ที่เปิดโอกาสให้คนรุ่นใหม่ได้เรียนรู้ ทดลอง สร้างสรรค์ และนำเสนอความคิดของตัวเอง ผ่านศิลปะ กิจกรรม และประสบการณ์ร่วมกัน</p>
+      <p class="secondary-copy">ตั้งแต่การปฐมนิเทศไปจนถึงการนำเสนอผลงาน ทุกขั้นตอนออกแบบมาเพื่อให้ทุกความคิดมีที่ยืน</p>
+      <a class="underlined-link" href="#program">SEE THE PROGRAM <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
     </div>
-
+  </div>
+  <div class="values-strip">
+    <div><span>01</span><h4>Art</h4><p>มองสิ่งเดิม ด้วยมุมมองใหม่</p></div>
+    <div><span>02</span><h4>Creativity</h4><p>เปิดพื้นที่ให้กับทุกความคิด</p></div>
+    <div><span>03</span><h4>People</h4><p>แตกต่าง แต่เติบโตไปด้วยกัน</p></div>
+    <div class="values-note"><span style="position:static;color:inherit;font-size:12px">Art, creativity and people — together.</span><svg width="22" height="22"><use href="#i-arrow"/></svg></div>
+  </div>
 </section>
 
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section
-    class="section about"
-    id="about"
->
-
-    <div class="section-label">
-        01 / ABOUT
-    </div>
-
-
-    <div class="about-layout">
-
-        <div>
-
-            <h2 class="section-heading reveal">
-
-                MORE
-                <br>
-
-                THAN
-                <span>101.</span>
-
-            </h2>
-
-
-            <p class="about-text reveal">
-
-                ดาวเด่นบัวหลวง 101
-                คือพื้นที่ที่เปิดโอกาสให้คนรุ่นใหม่
-                ได้เรียนรู้ ทดลอง สร้างสรรค์
-                และนำเสนอความคิดของตัวเอง
-                ผ่านศิลปะ กิจกรรม และประสบการณ์ร่วมกัน
-
-            </p>
-
-        </div>
-
-
-        <div class="about-side reveal">
-
-            <p>
-
-                พื้นที่แห่งการเรียนรู้
-                การสร้างสรรค์
-                และการเติบโตสำหรับคนรุ่นใหม่
-
-            </p>
-
-        </div>
-
-    </div>
-
+<!-- PROGRAM -->
+<section class="section program-section" id="program">
+  <div class="section-label"><span>02 / PROGRAM</span><span>THE JOURNEY</span></div>
+  <div class="section-heading-row">
+    <h2>YOUR NEXT<br><span class="blue-text">CHAPTER.</span></h2>
+    <p class="section-intro">จากการพบกันครั้งแรก สู่การสร้างสรรค์ที่เป็นตัวคุณ สำรวจเส้นทางการเรียนรู้ของดาวเด่นบัวหลวง 101</p>
+  </div>
+  <div class="program-list">
+    <details class="program-item" name="program" open>
+      <summary>
+        <span class="row-index">01</span>
+        <div class="program-title"><h3>การปฐมนิเทศ</h3><span>Meet. Connect. Begin.</span></div>
+        <span class="program-date">17—19 OCTOBER</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <div class="program-description">
+        <p>ทำความรู้จักกับพื้นที่ เพื่อนร่วมโครงการ และแนวทางการสร้างสรรค์ เริ่มต้นจากการเปิดใจ แลกเปลี่ยนมุมมอง และเรียนรู้ไปด้วยกัน</p>
+        <a href="#contact">สอบถามรายละเอียด <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+      </div>
+    </details>
+    <details class="program-item" name="program">
+      <summary>
+        <span class="row-index">02</span>
+        <div class="program-title"><h3>การสร้างสรรค์ผลงาน</h3><span>Explore your own perspective.</span></div>
+        <span class="program-date">OCTOBER—NOVEMBER</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <div class="program-description">
+        <p>ช่วงเวลาสำหรับการพัฒนาความคิด ทดลอง และสร้างสรรค์ผลงานในแบบของตัวเอง ด้วยมุมมองที่เป็นอิสระ</p>
+        <a href="#contact">สอบถามรายละเอียด <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+      </div>
+    </details>
+    <details class="program-item" name="program">
+      <summary>
+        <span class="row-index">03</span>
+        <div class="program-title"><h3>การแข่งขันและการตัดสิน</h3><span>Share the thinking behind the work.</span></div>
+        <span class="program-date">09—15 NOVEMBER</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <div class="program-description">
+        <p>นำเสนอแนวคิดเบื้องหลังผลงานต่อคณะกรรมการ และแลกเปลี่ยนมุมมองกับผู้ร่วมโครงการ ระหว่างวันที่ 9–15 พฤศจิกายน</p>
+        <a href="#contact">สอบถามรายละเอียด <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+      </div>
+    </details>
+    <details class="program-item" name="program">
+      <summary>
+        <span class="row-index">04</span>
+        <div class="program-title"><h3>การนำเสนอผลงาน</h3><span>Let your ideas meet the world.</span></div>
+        <span class="program-date">BUALUANG 101</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <div class="program-description">
+        <p>เปิดให้ผลงานได้พบกับผู้ชม เพื่อให้ความคิดของคุณได้เดินทางไปไกลกว่าห้องเรียนและพื้นที่สร้างสรรค์</p>
+        <a href="#contact">สอบถามรายละเอียด <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+      </div>
+    </details>
+  </div>
+  <div class="program-note">
+    <span>THE JOURNEY · OCTOBER—NOVEMBER 2026</span>
+    <p>ติดตามรายละเอียดและประกาศเพิ่มเติมผ่านช่องทางอย่างเป็นทางการของโครงการ</p>
+  </div>
 </section>
 
+<!-- WORKS -->
+<section class="section works-section" id="works">
+  <div class="section-label"><span>03 / WORKS</span><span>THREE WAYS IN.</span></div>
+  <div class="section-heading-row">
+    <h2>MAKE<br><span class="outline-text">SOMETHING.</span></h2>
+    <p class="section-intro">งานศิลปะไม่ได้มีคำตอบเดียว<br>เปิดพื้นที่ให้ความคิด รูปแบบ และมุมมอง<br>เกิดขึ้นได้อย่างอิสระ</p>
+  </div>
 
-<!-- =====================================================
-     PROGRAM
-===================================================== -->
+  <div class="work-filters" role="group" aria-label="Filter works">
+    <button type="button" class="selected" data-filter="all">All explorations <span id="workCount">03</span></button>
+    <button type="button" data-filter="art">Art</button>
+    <button type="button" data-filter="creativity">Creativity</button>
+    <button type="button" data-filter="people">People</button>
+  </div>
 
-<section
-    class="section program"
-    id="program"
->
+  <div class="work-grid">
+    <button type="button" class="work-card" data-cat="art"
+      data-kicker="VISUAL EXPLORATION" data-title="A new way of seeing." data-thai="มองสิ่งเดิม ด้วยมุมมองใหม่"
+      data-body="ศิลปะคือการมองสิ่งเดิมด้วยมุมมองใหม่ ลองตั้งคำถามกับสิ่งที่คุ้นเคย แล้วค้นหาวิธีเล่าเรื่องในแบบของคุณ">
+      <div class="work-poster poster-art">
+        <span class="poster-tag">BUALUANG 101 / ART</span>
+        <div class="poster-shapes"><span></span><span></span></div>
+        <span class="poster-letter" aria-hidden="true">A</span>
+        <div class="poster-caption">ART<span>IS A POSSIBILITY.</span></div>
+        <svg class="poster-arrow" width="26" height="26"><use href="#i-arrow"/></svg>
+      </div>
+      <div class="work-card-caption"><span>VISUAL EXPLORATION</span><h3>A new way of seeing.</h3><p>มองสิ่งเดิม ด้วยมุมมองใหม่</p></div>
+    </button>
 
-    <div class="section-label">
-        02 / PROGRAM
-    </div>
+    <button type="button" class="work-card" data-cat="creativity"
+      data-kicker="IDEAS & EXPERIMENTS" data-title="Make room for ideas." data-thai="เปิดพื้นที่ให้กับทุกความคิด"
+      data-body="ความคิดสร้างสรรค์เติบโตได้เมื่อมีพื้นที่ให้ทดลอง ผิดพลาด และลองใหม่ ที่นี่ทุกความคิดมีที่ยืน">
+      <div class="work-poster poster-creativity">
+        <span class="poster-tag">BUALUANG 101 / CREATIVITY</span>
+        <div class="poster-shapes"><span></span><span></span></div>
+        <span class="poster-letter" aria-hidden="true">C</span>
+        <div class="poster-caption">CREATIVITY<span>IS A POSSIBILITY.</span></div>
+        <svg class="poster-arrow" width="26" height="26"><use href="#i-arrow"/></svg>
+      </div>
+      <div class="work-card-caption"><span>IDEAS &amp; EXPERIMENTS</span><h3>Make room for ideas.</h3><p>เปิดพื้นที่ให้กับทุกความคิด</p></div>
+    </button>
 
+    <button type="button" class="work-card" data-cat="people"
+      data-kicker="PEOPLE & CULTURE" data-title="Different, together." data-thai="แตกต่าง แต่เติบโตไปด้วยกัน"
+      data-body="ความแตกต่างของผู้คนคือพลังของวัฒนธรรมร่วมสมัย เราเรียนรู้และเติบโตไปด้วยกันผ่านมุมมองที่หลากหลาย">
+      <div class="work-poster poster-people">
+        <span class="poster-tag">BUALUANG 101 / PEOPLE</span>
+        <div class="poster-shapes"><span></span><span></span></div>
+        <span class="poster-letter" aria-hidden="true">P</span>
+        <div class="poster-caption">PEOPLE<span>IS A POSSIBILITY.</span></div>
+        <svg class="poster-arrow" width="26" height="26"><use href="#i-arrow"/></svg>
+      </div>
+      <div class="work-card-caption"><span>PEOPLE &amp; CULTURE</span><h3>Different, together.</h3><p>แตกต่าง แต่เติบโตไปด้วยกัน</p></div>
+    </button>
+  </div>
 
-    <h2 class="section-heading reveal">
-
-        THE
-        <br>
-
-        PROGRAM.
-
-    </h2>
-
-
-    <div class="program-list reveal">
-
-        <div class="program-row">
-
-            <div class="program-number">
-                01
-            </div>
-
-            <div class="program-name">
-                การปฐมนิเทศ
-            </div>
-
-            <div class="program-date">
-                17—19 OCTOBER
-            </div>
-
-        </div>
-
-
-        <div class="program-row">
-
-            <div class="program-number">
-                02
-            </div>
-
-            <div class="program-name">
-                การสร้างสรรค์ผลงาน
-            </div>
-
-            <div class="program-date">
-                OCTOBER—NOVEMBER
-            </div>
-
-        </div>
-
-
-        <div class="program-row">
-
-            <div class="program-number">
-                03
-            </div>
-
-            <div class="program-name">
-                การแข่งขันและการตัดสิน
-            </div>
-
-            <div class="program-date">
-                09—15 NOVEMBER
-            </div>
-
-        </div>
-
-
-        <div class="program-row">
-
-            <div class="program-number">
-                04
-            </div>
-
-            <div class="program-name">
-                การนำเสนอผลงาน
-            </div>
-
-            <div class="program-date">
-                BUALUANG 101
-            </div>
-
-        </div>
-
-    </div>
-
+  <div class="works-footnote"><span>BUALUANG 101 / EXPLORATIONS</span><span>ART / CREATIVITY / PEOPLE</span></div>
 </section>
 
-
-<!-- =====================================================
-     WORKS
-===================================================== -->
-
-<section
-    class="section works"
-    id="works"
->
-
-    <div class="section-label">
-        03 / WORKS
-    </div>
-
-
-    <div class="works-intro">
-
-        <h2 class="section-heading reveal">
-
-            MAKE
-            <br>
-
-            SOMETHING.
-
-        </h2>
-
-
-        <p class="reveal">
-
-            งานศิลปะไม่ได้มีคำตอบเดียว
-            พื้นที่นี้เปิดให้ความคิด
-            รูปแบบ และมุมมอง
-            สามารถเกิดขึ้นได้อย่างอิสระ
-
-        </p>
-
-    </div>
-
-
-    <div class="art-grid">
-
-
-        <article class="art-card reveal">
-
-            <div class="art-visual art-one">
-
-                <span class="art-number">
-                    01
-                </span>
-
-                <span class="art-big">
-                    A
-                </span>
-
-                <div class="art-info">
-
-                    <h3>
-                        ART
-                    </h3>
-
-                    <span>
-                        VISUAL / 01
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article class="art-card reveal">
-
-            <div class="art-visual art-two">
-
-                <span class="art-number">
-                    02
-                </span>
-
-                <span class="art-big">
-                    C
-                </span>
-
-                <div class="art-info">
-
-                    <h3>
-                        CREATIVITY
-                    </h3>
-
-                    <span>
-                        IDEA / 02
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article class="art-card reveal">
-
-            <div class="art-visual art-three">
-
-                <span class="art-number">
-                    03
-                </span>
-
-                <span class="art-big">
-                    P
-                </span>
-
-                <div class="art-info">
-
-                    <h3>
-                        PEOPLE
-                    </h3>
-
-                    <span>
-                        CULTURE / 03
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
+<!-- STATEMENT -->
+<section class="statement-section">
+  <span class="statement-spark" aria-hidden="true">✦</span>
+  <div>
+    <span class="small-eyebrow">A QUESTION TO START WITH</span>
+    <p>ART IS NOT <span>THE ANSWER.</span><br>IT IS THE <span>QUESTION.</span></p>
+    <span class="statement-thai">งานศิลปะไม่ได้มีคำตอบเดียว</span>
+  </div>
+  <svg class="statement-arrow" width="56" height="56" aria-hidden="true"><use href="#i-arrow"/></svg>
 </section>
 
+<!-- NEWS + FAQ -->
+<section class="section news-section" id="news">
+  <div class="section-label"><span>04 / NEWS &amp; NOTES</span><span>STAY IN THE LOOP.</span></div>
+  <div class="section-heading-row">
+    <h2>LATEST <span class="blue-text">NOTES.</span></h2>
+    <a class="underlined-link" href="#contact">FOLLOW THE UPDATES <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+  </div>
 
-<!-- =====================================================
-     STATEMENT
-===================================================== -->
+  <div class="news-list">
+    <details class="news-item" open>
+      <summary>
+        <span class="row-index">01</span>
+        <div class="news-copy"><span class="small-eyebrow">PROGRAM UPDATE</span><h3 class="is-first">เตรียมพบกับกิจกรรมดาวเด่นบัวหลวง 101</h3></div>
+        <span class="news-date">OCT 2026</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <p class="news-description">เริ่มต้นด้วยกิจกรรมปฐมนิเทศ วันที่ 17–19 ตุลาคม พบกับพื้นที่แห่งการเรียนรู้ การสร้างสรรค์ และประสบการณ์ร่วมกัน ติดตามรายละเอียดการเข้าร่วมผ่านช่องทางอย่างเป็นทางการ</p>
+    </details>
+    <details class="news-item" open>
+      <summary>
+        <span class="row-index">02</span>
+        <div class="news-copy"><span class="small-eyebrow">CREATIVE JOURNEY</span><h3>เปิดพื้นที่สำหรับการสร้างสรรค์ผลงาน</h3></div>
+        <span class="news-date">OCT 2026</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <p class="news-description">ช่วงเดือนตุลาคมถึงพฤศจิกายนเป็นเวลาสำหรับการพัฒนาความคิด ทดลอง และสร้างสรรค์ผลงาน ติดตามเรื่องราวและความเคลื่อนไหวได้ทางโซเชียลมีเดียของโครงการ</p>
+    </details>
+    <details class="news-item" open>
+      <summary>
+        <span class="row-index">03</span>
+        <div class="news-copy"><span class="small-eyebrow">WHAT'S NEXT</span><h3>กิจกรรมการแข่งขันและการตัดสิน</h3></div>
+        <span class="news-date">NOV 2026</span>
+        <span class="expand-icon"><svg width="20" height="20"><use href="#i-plus"/></svg><svg width="20" height="20"><use href="#i-minus"/></svg></span>
+      </summary>
+      <p class="news-description">กำหนดช่วงการแข่งขันและการตัดสิน วันที่ 9–15 พฤศจิกายน รายละเอียดเพิ่มเติมและประกาศของโครงการสามารถติดตามได้จากช่องทางอย่างเป็นทางการ</p>
+    </details>
+  </div>
 
-<section class="section statement">
-
-    <div class="statement-text reveal">
-
-        ART IS NOT
-        <em>THE ANSWER.</em>
-
-        <br>
-
-        IT IS THE
-        <em>QUESTION.</em>
-
+  <div class="faq-section">
+    <div>
+      <div class="section-label"><span>GOOD TO KNOW</span></div>
+      <h2>A FEW<br><span class="blue-text">QUESTIONS.</span></h2>
+      <p>มีคำถามเพิ่มเติม? เราพร้อมรับฟัง</p>
+      <a class="underlined-link" href="mailto:bualuang101.channel@gmail.com">SEND US A NOTE <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
     </div>
-
+    <div class="faq-list">
+      <details open>
+        <summary>ดาวเด่นบัวหลวง 101 คืออะไร? <span class="expand-icon"><svg width="18" height="18"><use href="#i-plus"/></svg><svg width="18" height="18"><use href="#i-minus"/></svg></span></summary>
+        <p>พื้นที่สำหรับคนรุ่นใหม่ในการเรียนรู้ ทดลอง และสร้างสรรค์ผ่านศิลปะและกิจกรรมร่วมกัน ตั้งแต่การปฐมนิเทศไปจนถึงการนำเสนอผลงาน</p>
+      </details>
+      <details open>
+        <summary>กิจกรรมจัดขึ้นเมื่อไหร่? <span class="expand-icon"><svg width="18" height="18"><use href="#i-plus"/></svg><svg width="18" height="18"><use href="#i-minus"/></svg></span></summary>
+        <p>กิจกรรมปฐมนิเทศกำหนดวันที่ 17–19 ตุลาคม 2026 การสร้างสรรค์ผลงานอยู่ในช่วงตุลาคม–พฤศจิกายน และการแข่งขันและการตัดสินวันที่ 9–15 พฤศจิกายน ติดตามรายละเอียดเพิ่มเติมผ่านช่องทางอย่างเป็นทางการ</p>
+      </details>
+      <details open>
+        <summary>จะเข้าร่วมหรือสอบถามรายละเอียดได้อย่างไร? <span class="expand-icon"><svg width="18" height="18"><use href="#i-plus"/></svg><svg width="18" height="18"><use href="#i-minus"/></svg></span></summary>
+        <p>ติดต่อทีมงานได้ทางอีเมล bualuang101.channel@gmail.com หรือส่งข้อความผ่าน Facebook และ Instagram ของโครงการ เพื่อสอบถามคุณสมบัติ วิธีเข้าร่วม และรายละเอียดกิจกรรม</p>
+      </details>
+      <details open>
+        <summary>ติดตามข่าวสารได้จากช่องทางไหน? <span class="expand-icon"><svg width="18" height="18"><use href="#i-plus"/></svg><svg width="18" height="18"><use href="#i-minus"/></svg></span></summary>
+        <p>ติดตาม Bualuang101 บน Facebook, @101bualuang บน Instagram, @bualuang101 บน TikTok และดาวเด่นบัวหลวง101 บน YouTube ลิงก์ทั้งหมดอยู่ในส่วนติดต่อด้านล่าง</p>
+      </details>
+    </div>
+  </div>
 </section>
 
-
-<!-- =====================================================
-     NEWS
-===================================================== -->
-
-<section
-    class="section news"
-    id="news"
->
-
-    <div class="section-label">
-        04 / NEWS
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-main">
+    <div>
+      <span class="small-eyebrow">THE NEXT CHAPTER STARTS WITH YOU.</span>
+      <h2>LET'S MAKE<br><span>WHAT'S NEXT.</span></h2>
+      <p>เรียนรู้ สร้างสรรค์ และเติบโตไปด้วยกันกับดาวเด่นบัวหลวง 101</p>
     </div>
-
-
-    <h2 class="section-heading reveal">
-
-        LATEST
-        <br>
-
-        NOTES.
-
-    </h2>
-
-
-    <div class="news-list reveal">
-
-        <div class="news-item">
-
-            <div class="news-index">
-                01
-            </div>
-
-            <div class="news-title">
-                เตรียมพบกับกิจกรรมดาวเด่นบัวหลวง 101
-            </div>
-
-            <div class="news-date">
-                OCT 2026
-            </div>
-
-        </div>
-
-
-        <div class="news-item">
-
-            <div class="news-index">
-                02
-            </div>
-
-            <div class="news-title">
-                เปิดพื้นที่สำหรับการสร้างสรรค์ผลงาน
-            </div>
-
-            <div class="news-date">
-                OCT 2026
-            </div>
-
-        </div>
-
-
-        <div class="news-item">
-
-            <div class="news-index">
-                03
-            </div>
-
-            <div class="news-title">
-                กิจกรรมการแข่งขันและการตัดสิน
-            </div>
-
-            <div class="news-date">
-                NOV 2026
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT / CTA
-===================================================== -->
-
-<section
-    class="section cta"
-    id="contact"
->
-
-    <h2>
-
-        JOIN
-        <br>
-
-        101.
-
-    </h2>
-
-
-    <a
-        href="mailto:"
-        class="cta-button"
-    >
-        GET IN TOUCH
+    <a class="contact-orbit" href="mailto:bualuang101.channel@gmail.com">
+      <svg width="40" height="40"><use href="#i-arrow"/></svg>
+      <span>GET IN TOUCH</span>
     </a>
-
+  </div>
+  <div class="social-grid">
+    <!-- TODO: confirm the real profile URLs -->
+    <a href="https://www.instagram.com/101bualuang" target="_blank" rel="noopener"><span>Instagram</span><div>@101bualuang <svg width="18" height="18"><use href="#i-arrow"/></svg></div></a>
+    <a href="https://www.facebook.com/Bualuang101" target="_blank" rel="noopener"><span>Facebook</span><div>Bualuang101 <svg width="18" height="18"><use href="#i-arrow"/></svg></div></a>
+    <a href="https://www.tiktok.com/@bualuang101" target="_blank" rel="noopener"><span>TikTok</span><div>@bualuang101 <svg width="18" height="18"><use href="#i-arrow"/></svg></div></a>
+    <a href="https://www.youtube.com/" target="_blank" rel="noopener"><span>YouTube</span><div>ดาวเด่นบัวหลวง101 <svg width="18" height="18"><use href="#i-arrow"/></svg></div></a>
+  </div>
 </section>
-
 
 </main>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
-    <div class="footer-top">
-
-        <div>
-
-            <div class="footer-brand">
-                BUALUANG 101
-            </div>
-
-            <div class="footer-thai">
-                ดาวเด่นบัวหลวง
-            </div>
-
-        </div>
-
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">BUALUANG 101<span>ดาวเด่นบัวหลวง</span></div>
+    <div class="footer-email">
+      <span>START A CONVERSATION</span>
+      <a href="mailto:bualuang101.channel@gmail.com">bualuang101.channel@gmail.com <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
     </div>
-
-
-    <div class="footer-bottom">
-
-        <span>
-            BUALUANG 101
-        </span>
-
-        <span>
-            ART / PEOPLE / CULTURE
-        </span>
-
-    </div>
-
+    <a class="back-to-top" href="#home">BACK TO TOP <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 BUALUANG 101</span>
+    <span>ART / PEOPLE / CULTURE</span>
+    <!-- TODO: set the Bualuang Foundation URL -->
+    <a href="#" target="_blank" rel="noopener">BUALUANG FOUNDATION <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+    <button class="ambient-control" id="ambientBtn" type="button" aria-pressed="false">
+      <svg width="18" height="18"><use id="ambientIcon" href="#i-mute"/></svg><span id="ambientLabel">AMBIENT OFF</span>
+    </button>
+  </div>
 </footer>
 
+<audio id="ambientAudio" src="assets/music/Greg Foat - Everyone Part 1.mp3" loop preload="metadata"></audio>
 
-<!-- =====================================================
-     MUSIC PLAYER
-===================================================== -->
-
-<div class="music-player">
-
-    <button
-        class="music-button"
-        id="musicButton"
-        type="button"
-        aria-label="Play music"
-    >
-
-        <span class="music-bars">
-
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </span>
-
-        <span
-            class="music-label"
-            id="musicLabel"
-        >
-            SOUND OFF
-        </span>
-
-    </button>
-
-</div>
-
-
-<!--
-    ใส่ไฟล์เพลงของน้องยูที่:
-
-    assets/audio/bualuang-101.mp3
--->
-
-<audio
-    id="backgroundMusic"
-    src="assets/music/Greg Foat - Everyone Part 1.mp3"
-    loop="assets/music/Greg Foat - Everyone Part 1.mp3"
-    preload="metadata"
-></audio>
-
+<!-- WORK DIALOG -->
+<dialog class="work-dialog" id="workDialog" aria-labelledby="dlgTitle">
+  <button class="dialog-close" id="dlgClose" aria-label="Close"><svg width="22" height="22"><use href="#i-close"/></svg></button>
+  <span class="small-eyebrow" id="dlgKicker"></span>
+  <h2 id="dlgTitle"></h2>
+  <h3 id="dlgThai"></h3>
+  <p id="dlgBody"></p>
+  <a class="underlined-link" href="#contact" id="dlgLink">สอบถามรายละเอียด <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+  <span class="dialog-note">BUALUANG 101 / ART · CREATIVITY · PEOPLE</span>
+</dialog>
 
 <script>
-/* V4 safety fallback: hide loader even if CSS animation is blocked */
-window.addEventListener('load', function () {
-  var loader = document.querySelector('.loader');
-  if (loader) {
-    setTimeout(function () { loader.classList.add('is-hidden'); }, 2200);
+(function(){
+  /* mobile menu */
+  var toggle=document.getElementById('menuToggle'),mnav=document.getElementById('mobileNav');
+  function setMenu(open){mnav.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';}
+  toggle.addEventListener('click',function(){setMenu(!mnav.classList.contains('is-open'));});
+  mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
+
+  /* active nav on scroll */
+  var links=document.querySelectorAll('.desktop-nav a');
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){links.forEach(function(l){l.classList.remove('active');});var l=map[en.target.id];if(l)l.classList.add('active');}
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s);});
   }
-});
 
-
-/* =========================================================
-   BUALUANG 101
-   JAVASCRIPT
-========================================================= */
-
-
-/* ---------------------------------------------------------
-   HEADER
---------------------------------------------------------- */
-
-const header =
-    document.getElementById("header");
-
-
-window.addEventListener(
-    "scroll",
-    function () {
-
-        if (window.scrollY > 40) {
-
-            header.classList.add("scrolled");
-
-        } else {
-
-            header.classList.remove("scrolled");
-
-        }
-
-    },
-    { passive: true }
-);
-
-
-/* ---------------------------------------------------------
-   MOBILE MENU
---------------------------------------------------------- */
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const mobileMenu =
-    document.getElementById("mobileMenu");
-
-
-if (menuButton && mobileMenu) {
-
-    menuButton.addEventListener(
-        "click",
-        function () {
-
-            mobileMenu.classList.toggle("open");
-
-            document.body.classList.toggle(
-                "menu-open"
-            );
-
-        }
-    );
-
-
-    mobileMenu
-        .querySelectorAll("a")
-        .forEach(function (link) {
-
-            link.addEventListener(
-                "click",
-                function () {
-
-                    mobileMenu.classList.remove(
-                        "open"
-                    );
-
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* ---------------------------------------------------------
-   REVEAL
---------------------------------------------------------- */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-if ("IntersectionObserver" in window) {
-
-    const observer =
-        new IntersectionObserver(
-            function (entries) {
-
-                entries.forEach(
-                    function (entry) {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "visible"
-                            );
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                threshold: 0.1
-            }
-        );
-
-
-    revealElements.forEach(
-        function (element) {
-
-            observer.observe(element);
-
-        }
-    );
-
-} else {
-
-    revealElements.forEach(
-        function (element) {
-
-            element.classList.add(
-                "visible"
-            );
-
-        }
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   HERO PARALLAX
---------------------------------------------------------- */
-
-const heroNumber =
-    document.querySelector(".hero-number");
-
-
-window.addEventListener(
-    "scroll",
-    function () {
-
-        if (!heroNumber) return;
-
-        if (
-            window.scrollY <
-            window.innerHeight
-        ) {
-
-            heroNumber.style.transform =
-                "translate3d(0," +
-                window.scrollY * .12 +
-                "px,0)";
-
-        }
-
-    },
-    { passive: true }
-);
-
-
-/* ---------------------------------------------------------
-   ACTIVITY / ART TILT
---------------------------------------------------------- */
-
-const cards =
-    document.querySelectorAll(".art-card");
-
-
-cards.forEach(
-    function (card) {
-
-        card.addEventListener(
-            "mousemove",
-            function (event) {
-
-                if (
-                    window.innerWidth < 900
-                ) {
-                    return;
-                }
-
-                const rect =
-                    card.getBoundingClientRect();
-
-                const x =
-                    event.clientX -
-                    rect.left;
-
-                const y =
-                    event.clientY -
-                    rect.top;
-
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
-                const rotateX =
-                    ((y - centerY) /
-                    centerY) * -2;
-
-                const rotateY =
-                    ((x - centerX) /
-                    centerX) * 2;
-
-                card.style.transform =
-                    "perspective(900px)" +
-                    " rotateX(" +
-                    rotateX +
-                    "deg)" +
-                    " rotateY(" +
-                    rotateY +
-                    "deg)" +
-                    " translateY(-8px)";
-
-            }
-        );
-
-
-        card.addEventListener(
-            "mouseleave",
-            function () {
-
-                card.style.transform = "";
-
-            }
-        );
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   MUSIC PLAYER
---------------------------------------------------------- */
-
-const musicButton =
-    document.getElementById(
-        "musicButton"
-    );
-
-const music =
-    document.getElementById(
-        "backgroundMusic"
-    );
-
-const musicLabel =
-    document.getElementById(
-        "musicLabel"
-    );
-
-
-if (musicButton && music) {
-
-    musicButton.addEventListener(
-        "click",
-        async function () {
-
-            if (music.paused) {
-
-                try {
-
-                    await music.play();
-
-                    musicButton.classList.add(
-                        "playing"
-                    );
-
-                    musicLabel.textContent =
-                        "SOUND ON";
-
-                }
-
-                catch (error) {
-
-                    console.error(
-                        "ไม่สามารถเปิดเพลงได้",
-                        error
-                    );
-
-                    musicLabel.textContent =
-                        "FILE ERROR";
-
-                }
-
-            } else {
-
-                music.pause();
-
-                musicButton.classList.remove(
-                    "playing"
-                );
-
-                musicLabel.textContent =
-                    "SOUND OFF";
-
-            }
-
-        }
-    );
-
-
-    music.addEventListener(
-        "error",
-        function () {
-
-            console.error(
-                "ไม่พบไฟล์เพลง:",
-                music.currentSrc
-            );
-
-            musicLabel.textContent =
-                "FILE ERROR";
-
-        }
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   ESC
---------------------------------------------------------- */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key === "Escape") {
-
-            if (mobileMenu) {
-
-                mobileMenu.classList.remove(
-                    "open"
-                );
-
-            }
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-        }
-
-    }
-);
-
+  /* work filters */
+  var cards=[].slice.call(document.querySelectorAll('.work-card')),count=document.getElementById('workCount');
+  document.querySelectorAll('.work-filters button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.work-filters button').forEach(function(b){b.classList.remove('selected');});
+      btn.classList.add('selected');
+      var f=btn.dataset.filter,n=0;
+      cards.forEach(function(c){var show=f==='all'||c.dataset.cat===f;c.hidden=!show;if(show)n++;});
+      count.textContent=('0'+(f==='all'?cards.length:n)).slice(-2);
+    });
+  });
+
+  /* work dialog */
+  var dlg=document.getElementById('workDialog');
+  cards.forEach(function(c){
+    c.addEventListener('click',function(){
+      document.getElementById('dlgKicker').textContent=c.dataset.kicker;
+      document.getElementById('dlgTitle').textContent=c.dataset.title;
+      document.getElementById('dlgThai').textContent=c.dataset.thai;
+      document.getElementById('dlgBody').textContent=c.dataset.body;
+      if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');
+    });
+  });
+  document.getElementById('dlgClose').addEventListener('click',function(){dlg.close();});
+  document.getElementById('dlgLink').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
+
+  /* ambient sound */
+  var audio=document.getElementById('ambientAudio'),btn=document.getElementById('ambientBtn'),
+      label=document.getElementById('ambientLabel'),icon=document.getElementById('ambientIcon');
+  function ui(on){btn.setAttribute('aria-pressed',on);label.textContent=on?'AMBIENT ON':'AMBIENT OFF';icon.setAttribute('href',on?'#i-sound':'#i-mute');}
+  btn.addEventListener('click',function(){
+    if(audio.paused){audio.play().then(function(){ui(true);}).catch(function(){label.textContent='FILE ERROR';btn.disabled=true;});}
+    else{audio.pause();ui(false);}
+  });
+  audio.addEventListener('error',function(){label.textContent='FILE ERROR';btn.disabled=true;});
+})();
 </script>
-
-
 </body>
-
 </html>
