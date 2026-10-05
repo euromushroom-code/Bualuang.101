@@ -682,16 +682,48 @@ details[open]>summary .expand-icon>svg:nth-child(2){display:block}
   document.getElementById('dlgLink').addEventListener('click',function(){dlg.close();});
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
 
+  <audio id="ambientAudio" preload="auto">
+  <source src="assets/music/Greg%20Foat%20-%20Everyone%20Part%201.mp3" type="audio/mpeg">
+</audio>
+
+<script>
   /* ambient sound */
-  var audio=document.getElementById('ambientAudio'),btn=document.getElementById('ambientBtn'),
-      label=document.getElementById('ambientLabel'),icon=document.getElementById('ambientIcon');
-  function ui(on){btn.setAttribute('aria-pressed',on);label.textContent=on?'AMBIENT ON':'AMBIENT OFF';icon.setAttribute('href',on?'#i-sound':'#i-mute');}
-  btn.addEventListener('click',function(){
-    if(audio.paused){audio.play().then(function(){ui(true);}).catch(function(){label.textContent='FILE ERROR';btn.disabled=true;});}
-    else{audio.pause();ui(false);}
+  var audio = document.getElementById('ambientAudio'),
+      btn = document.getElementById('ambientBtn'),
+      label = document.getElementById('ambientLabel'),
+      icon = document.getElementById('ambientIcon');
+
+  function ui(on) {
+    btn.setAttribute('aria-pressed', on);
+    label.textContent = on ? 'AMBIENT ON' : 'AMBIENT OFF';
+    icon.setAttribute('href', on ? '#i-sound' : '#i-mute');
+  }
+
+  btn.addEventListener('click', function () {
+    if (audio.paused) {
+      audio.play()
+        .then(function () {
+          ui(true);
+        })
+        .catch(function (error) {
+          console.error('Audio playback error:', error);
+          label.textContent = 'FILE ERROR';
+          btn.disabled = true;
+        });
+    } else {
+      audio.pause();
+      ui(false);
+    }
   });
-  audio.addEventListener('error',function(){label.textContent='FILE ERROR';btn.disabled=true;});
-})();
+
+  audio.addEventListener('error', function () {
+    console.error('Cannot load audio file:', audio.src);
+    label.textContent = 'FILE ERROR';
+    btn.disabled = true;
+  });
+
+  ui(false);
+</script>
 </script>
 </body>
 </html>
