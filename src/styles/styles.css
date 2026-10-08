@@ -1603,24 +1603,7 @@ body::after {
 
   .work-card:nth-child(1),
   .work-card:nth-child(2),
-  .work-card:nth-child(3) {
-    transform: none;
-  }
-
-  .work-poster {
-    filter:
-      contrast(1.06)
-      saturate(.94);
-  }
-
-  .work-card:hover .work-poster {
-    transform: translateY(-3px);
-  }
-
-  .poster-caption {
-    letter-spacing: -.04em;
-  }
-}
+  .work-card:
 
 
 /* =========================================================
